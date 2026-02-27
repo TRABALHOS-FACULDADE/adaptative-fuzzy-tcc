@@ -1,0 +1,925 @@
+Analysis & Synthesis report for adaptative_fuzzy
+Fri Feb 27 00:05:19 2026
+Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis DSP Block Usage Summary
+  9. State Machine - |fuzzy_top|state
+ 10. State Machine - |fuzzy_top|adaptation_engine:u_adapt|state
+ 11. State Machine - |fuzzy_top|defuzzifier:u_defuzz|state
+ 12. State Machine - |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|state
+ 13. State Machine - |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|state
+ 14. State Machine - |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|state
+ 15. State Machine - |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|state
+ 16. State Machine - |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|state
+ 17. State Machine - |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|state
+ 18. State Machine - |fuzzy_top|uart_receiver:u_uart|proto_state
+ 19. State Machine - |fuzzy_top|uart_receiver:u_uart|uart_state
+ 20. Registers Removed During Synthesis
+ 21. Removed Registers Triggering Further Register Optimizations
+ 22. General Register Statistics
+ 23. Inverted Register Statistics
+ 24. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 25. Parameter Settings for User Entity Instance: Top-level Entity: |fuzzy_top
+ 26. Parameter Settings for User Entity Instance: uart_receiver:u_uart
+ 27. Post-Synthesis Netlist Statistics for Top Partition
+ 28. Elapsed Time Per Partition
+ 29. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2023  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++---------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Fri Feb 27 00:05:19 2026          ;
+; Quartus Prime Version           ; 22.1std.1 Build 917 02/14/2023 SC Lite Edition ;
+; Revision Name                   ; adaptative_fuzzy                               ;
+; Top-level Entity Name           ; fuzzy_top                                      ;
+; Family                          ; Cyclone V                                      ;
+; Logic utilization (in ALMs)     ; N/A                                            ;
+; Total registers                 ; 2340                                           ;
+; Total pins                      ; 119                                            ;
+; Total virtual pins              ; 0                                              ;
+; Total block memory bits         ; 0                                              ;
+; Total DSP Blocks                ; 13                                             ;
+; Total HSSI RX PCSs              ; 0                                              ;
+; Total HSSI PMA RX Deserializers ; 0                                              ;
+; Total HSSI TX PCSs              ; 0                                              ;
+; Total HSSI PMA TX Serializers   ; 0                                              ;
+; Total PLLs                      ; 0                                              ;
+; Total DLLs                      ; 0                                              ;
++---------------------------------+------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CGXFC7C7F23C8     ;                    ;
+; Top-level entity name                                                           ; fuzzy_top          ; adaptative_fuzzy   ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 10          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 10          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.1%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processors 6-10        ;   0.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                               ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                        ; Library ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------------+---------+
+; uart_receiver.vhd                ; yes             ; User VHDL File  ; C:/Dev/TCC/AdaptativeFuzzyForGenericResources/uart_receiver.vhd     ;         ;
+; triangular_mf.vhd                ; yes             ; User VHDL File  ; C:/Dev/TCC/AdaptativeFuzzyForGenericResources/triangular_mf.vhd     ;         ;
+; rule_evaluator.vhd               ; yes             ; User VHDL File  ; C:/Dev/TCC/AdaptativeFuzzyForGenericResources/rule_evaluator.vhd    ;         ;
+; fuzzy_top.vhd                    ; yes             ; User VHDL File  ; C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd         ;         ;
+; fuzzifier.vhd                    ; yes             ; User VHDL File  ; C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzifier.vhd         ;         ;
+; defuzzifier.vhd                  ; yes             ; User VHDL File  ; C:/Dev/TCC/AdaptativeFuzzyForGenericResources/defuzzifier.vhd       ;         ;
+; config_registers.vhd             ; yes             ; User VHDL File  ; C:/Dev/TCC/AdaptativeFuzzyForGenericResources/config_registers.vhd  ;         ;
+; aggregator.vhd                   ; yes             ; User VHDL File  ; C:/Dev/TCC/AdaptativeFuzzyForGenericResources/aggregator.vhd        ;         ;
+; adaptation_engine.vhd            ; yes             ; User VHDL File  ; C:/Dev/TCC/AdaptativeFuzzyForGenericResources/adaptation_engine.vhd ;         ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimate of Logic utilization (ALMs needed) ; 3450      ;
+;                                             ;           ;
+; Combinational ALUT usage for logic          ; 5080      ;
+;     -- 7 input functions                    ; 101       ;
+;     -- 6 input functions                    ; 1411      ;
+;     -- 5 input functions                    ; 692       ;
+;     -- 4 input functions                    ; 625       ;
+;     -- <=3 input functions                  ; 2251      ;
+;                                             ;           ;
+; Dedicated logic registers                   ; 2340      ;
+;                                             ;           ;
+; I/O pins                                    ; 119       ;
+;                                             ;           ;
+; Total DSP Blocks                            ; 13        ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 2340      ;
+; Total fan-out                               ; 31413     ;
+; Average fan-out                             ; 4.10      ;
++---------------------------------------------+-----------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                      ;
++------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------+-------------------+--------------+
+; Compilation Hierarchy Node         ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                     ; Entity Name       ; Library Name ;
++------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------+-------------------+--------------+
+; |fuzzy_top                         ; 5080 (15)           ; 2340 (29)                 ; 0                 ; 13         ; 119  ; 0            ; |fuzzy_top                                              ; fuzzy_top         ; work         ;
+;    |adaptation_engine:u_adapt|     ; 1972 (1972)         ; 873 (873)                 ; 0                 ; 10         ; 0    ; 0            ; |fuzzy_top|adaptation_engine:u_adapt                    ; adaptation_engine ; work         ;
+;    |aggregator:u_agg|              ; 1091 (1091)         ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|aggregator:u_agg                             ; aggregator        ; work         ;
+;    |config_registers:u_config|     ; 83 (83)             ; 402 (402)                 ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|config_registers:u_config                    ; config_registers  ; work         ;
+;    |defuzzifier:u_defuzz|          ; 333 (333)           ; 275 (275)                 ; 0                 ; 3          ; 0    ; 0            ; |fuzzy_top|defuzzifier:u_defuzz                         ; defuzzifier       ; work         ;
+;    |fuzzifier:u_fuzz1|             ; 660 (3)             ; 345 (3)                   ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|fuzzifier:u_fuzz1                            ; fuzzifier         ; work         ;
+;       |triangular_mf:mf_high_inst| ; 219 (219)           ; 114 (114)                 ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_high_inst ; triangular_mf     ; work         ;
+;       |triangular_mf:mf_low_inst|  ; 219 (219)           ; 114 (114)                 ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_low_inst  ; triangular_mf     ; work         ;
+;       |triangular_mf:mf_med_inst|  ; 219 (219)           ; 114 (114)                 ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_med_inst  ; triangular_mf     ; work         ;
+;    |fuzzifier:u_fuzz2|             ; 660 (3)             ; 345 (3)                   ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|fuzzifier:u_fuzz2                            ; fuzzifier         ; work         ;
+;       |triangular_mf:mf_high_inst| ; 219 (219)           ; 114 (114)                 ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_high_inst ; triangular_mf     ; work         ;
+;       |triangular_mf:mf_low_inst|  ; 219 (219)           ; 114 (114)                 ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_low_inst  ; triangular_mf     ; work         ;
+;       |triangular_mf:mf_med_inst|  ; 219 (219)           ; 114 (114)                 ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_med_inst  ; triangular_mf     ; work         ;
+;    |rule_evaluator:u_rules|        ; 218 (218)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|rule_evaluator:u_rules                       ; rule_evaluator    ; work         ;
+;    |uart_receiver:u_uart|          ; 48 (48)             ; 71 (71)                   ; 0                 ; 0          ; 0    ; 0            ; |fuzzy_top|uart_receiver:u_uart                         ; uart_receiver     ; work         ;
++------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------+-------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary ;
++-------------------------------+--------------+
+; Statistic                     ; Number Used  ;
++-------------------------------+--------------+
+; Two Independent 18x18         ; 11           ;
+; Independent 18x18 plus 36     ; 2            ;
+; Total number of DSP blocks    ; 13           ;
+;                               ;              ;
+; Fixed Point Signed Multiplier ; 13           ;
++-------------------------------+--------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|state                                                                                                                                                      ;
++----------------------+--------------------+---------------------+----------------+---------------------+----------------------+-------------------+--------------------+--------------+
+; Name                 ; state.S_ADAPT_WAIT ; state.S_ADAPT_START ; state.S_OUTPUT ; state.S_DEFUZZ_WAIT ; state.S_DEFUZZ_START ; state.S_FUZZ_WAIT ; state.S_FUZZ_START ; state.S_IDLE ;
++----------------------+--------------------+---------------------+----------------+---------------------+----------------------+-------------------+--------------------+--------------+
+; state.S_IDLE         ; 0                  ; 0                   ; 0              ; 0                   ; 0                    ; 0                 ; 0                  ; 0            ;
+; state.S_FUZZ_START   ; 0                  ; 0                   ; 0              ; 0                   ; 0                    ; 0                 ; 1                  ; 1            ;
+; state.S_FUZZ_WAIT    ; 0                  ; 0                   ; 0              ; 0                   ; 0                    ; 1                 ; 0                  ; 1            ;
+; state.S_DEFUZZ_START ; 0                  ; 0                   ; 0              ; 0                   ; 1                    ; 0                 ; 0                  ; 1            ;
+; state.S_DEFUZZ_WAIT  ; 0                  ; 0                   ; 0              ; 1                   ; 0                    ; 0                 ; 0                  ; 1            ;
+; state.S_OUTPUT       ; 0                  ; 0                   ; 1              ; 0                   ; 0                    ; 0                 ; 0                  ; 1            ;
+; state.S_ADAPT_START  ; 0                  ; 1                   ; 0              ; 0                   ; 0                    ; 0                 ; 0                  ; 1            ;
+; state.S_ADAPT_WAIT   ; 1                  ; 0                   ; 0              ; 0                   ; 0                    ; 0                 ; 0                  ; 1            ;
++----------------------+--------------------+---------------------+----------------+---------------------+----------------------+-------------------+--------------------+--------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|adaptation_engine:u_adapt|state                                                                                                                                                                                                                                                                                                                                                                                                                        ;
++------------------------+--------------+--------------------+------------------+------------------+---------------+---------------+------------------------+------------------------+---------------------+---------------------+---------------------+---------------------+--------------------+--------------------+---------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+--------------+
+; Name                   ; state.S_DONE ; state.S_WRITE_REGS ; state.S_DERIVE_2 ; state.S_DERIVE_1 ; state.S_EMA_2 ; state.S_EMA_1 ; state.S_CALC_TARGETS_2 ; state.S_CALC_TARGETS_1 ; state.S_SQRT_2_ITER ; state.S_SQRT_2_INIT ; state.S_SQRT_1_ITER ; state.S_SQRT_1_INIT ; state.S_VARIANCE_2 ; state.S_VARIANCE_1 ; state.S_CHECK_ADAPT ; state.S_WELFORD_6 ; state.S_WELFORD_5 ; state.S_WELFORD_4 ; state.S_WELFORD_3 ; state.S_WELFORD_2 ; state.S_WELFORD_1 ; state.S_IDLE ;
++------------------------+--------------+--------------------+------------------+------------------+---------------+---------------+------------------------+------------------------+---------------------+---------------------+---------------------+---------------------+--------------------+--------------------+---------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+--------------+
+; state.S_IDLE           ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0            ;
+; state.S_WELFORD_1      ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 1            ;
+; state.S_WELFORD_2      ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 1            ;
+; state.S_WELFORD_3      ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 1            ;
+; state.S_WELFORD_4      ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_WELFORD_5      ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_WELFORD_6      ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 1                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_CHECK_ADAPT    ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 1                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_VARIANCE_1     ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 1                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_VARIANCE_2     ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 1                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_SQRT_1_INIT    ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 1                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_SQRT_1_ITER    ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 1                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_SQRT_2_INIT    ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 1                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_SQRT_2_ITER    ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 1                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_CALC_TARGETS_1 ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 1                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_CALC_TARGETS_2 ; 0            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 1                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_EMA_1          ; 0            ; 0                  ; 0                ; 0                ; 0             ; 1             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_EMA_2          ; 0            ; 0                  ; 0                ; 0                ; 1             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_DERIVE_1       ; 0            ; 0                  ; 0                ; 1                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_DERIVE_2       ; 0            ; 0                  ; 1                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_WRITE_REGS     ; 0            ; 1                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
+; state.S_DONE           ; 1            ; 0                  ; 0                ; 0                ; 0             ; 0             ; 0                      ; 0                      ; 0                   ; 0                   ; 0                   ; 0                   ; 0                  ; 0                  ; 0                   ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 0                 ; 1            ;
++------------------------+--------------+--------------------+------------------+------------------+---------------+---------------+------------------------+------------------------+---------------------+---------------------+---------------------+---------------------+--------------------+--------------------+---------------------+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+--------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|defuzzifier:u_defuzz|state                                                 ;
++------------------+--------------+------------------+----------------+------------------+--------------+
+; Name             ; state.S_DONE ; state.S_CLASSIFY ; state.S_DIVIDE ; state.S_MULTIPLY ; state.S_IDLE ;
++------------------+--------------+------------------+----------------+------------------+--------------+
+; state.S_IDLE     ; 0            ; 0                ; 0              ; 0                ; 0            ;
+; state.S_MULTIPLY ; 0            ; 0                ; 0              ; 1                ; 1            ;
+; state.S_DIVIDE   ; 0            ; 0                ; 1              ; 0                ; 1            ;
+; state.S_CLASSIFY ; 0            ; 1                ; 0              ; 0                ; 1            ;
+; state.S_DONE     ; 1            ; 0                ; 0              ; 0                ; 1            ;
++------------------+--------------+------------------+----------------+------------------+--------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|state ;
++--------------+--------------+-------------+--------------+--------------------+
+; Name         ; state.S_DONE ; state.S_DIV ; state.S_EVAL ; state.S_IDLE       ;
++--------------+--------------+-------------+--------------+--------------------+
+; state.S_IDLE ; 0            ; 0           ; 0            ; 0                  ;
+; state.S_EVAL ; 0            ; 0           ; 1            ; 1                  ;
+; state.S_DIV  ; 0            ; 1           ; 0            ; 1                  ;
+; state.S_DONE ; 1            ; 0           ; 0            ; 1                  ;
++--------------+--------------+-------------+--------------+--------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|state ;
++--------------+--------------+-------------+--------------+-------------------+
+; Name         ; state.S_DONE ; state.S_DIV ; state.S_EVAL ; state.S_IDLE      ;
++--------------+--------------+-------------+--------------+-------------------+
+; state.S_IDLE ; 0            ; 0           ; 0            ; 0                 ;
+; state.S_EVAL ; 0            ; 0           ; 1            ; 1                 ;
+; state.S_DIV  ; 0            ; 1           ; 0            ; 1                 ;
+; state.S_DONE ; 1            ; 0           ; 0            ; 1                 ;
++--------------+--------------+-------------+--------------+-------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|state ;
++--------------+--------------+-------------+--------------+-------------------+
+; Name         ; state.S_DONE ; state.S_DIV ; state.S_EVAL ; state.S_IDLE      ;
++--------------+--------------+-------------+--------------+-------------------+
+; state.S_IDLE ; 0            ; 0           ; 0            ; 0                 ;
+; state.S_EVAL ; 0            ; 0           ; 1            ; 1                 ;
+; state.S_DIV  ; 0            ; 1           ; 0            ; 1                 ;
+; state.S_DONE ; 1            ; 0           ; 0            ; 1                 ;
++--------------+--------------+-------------+--------------+-------------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|state ;
++--------------+--------------+-------------+--------------+--------------------+
+; Name         ; state.S_DONE ; state.S_DIV ; state.S_EVAL ; state.S_IDLE       ;
++--------------+--------------+-------------+--------------+--------------------+
+; state.S_IDLE ; 0            ; 0           ; 0            ; 0                  ;
+; state.S_EVAL ; 0            ; 0           ; 1            ; 1                  ;
+; state.S_DIV  ; 0            ; 1           ; 0            ; 1                  ;
+; state.S_DONE ; 1            ; 0           ; 0            ; 1                  ;
++--------------+--------------+-------------+--------------+--------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|state ;
++--------------+--------------+-------------+--------------+-------------------+
+; Name         ; state.S_DONE ; state.S_DIV ; state.S_EVAL ; state.S_IDLE      ;
++--------------+--------------+-------------+--------------+-------------------+
+; state.S_IDLE ; 0            ; 0           ; 0            ; 0                 ;
+; state.S_EVAL ; 0            ; 0           ; 1            ; 1                 ;
+; state.S_DIV  ; 0            ; 1           ; 0            ; 1                 ;
+; state.S_DONE ; 1            ; 0           ; 0            ; 1                 ;
++--------------+--------------+-------------+--------------+-------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|state ;
++--------------+--------------+-------------+--------------+-------------------+
+; Name         ; state.S_DONE ; state.S_DIV ; state.S_EVAL ; state.S_IDLE      ;
++--------------+--------------+-------------+--------------+-------------------+
+; state.S_IDLE ; 0            ; 0           ; 0            ; 0                 ;
+; state.S_EVAL ; 0            ; 0           ; 1            ; 1                 ;
+; state.S_DIV  ; 0            ; 1           ; 0            ; 1                 ;
+; state.S_DONE ; 1            ; 0           ; 0            ; 1                 ;
++--------------+--------------+-------------+--------------+-------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|uart_receiver:u_uart|proto_state                                          ;
++-------------------------+------------------------+-------------------------+-------------------------+
+; Name                    ; proto_state.P_WAIT_LOW ; proto_state.P_WAIT_HIGH ; proto_state.P_WAIT_ADDR ;
++-------------------------+------------------------+-------------------------+-------------------------+
+; proto_state.P_WAIT_ADDR ; 0                      ; 0                       ; 0                       ;
+; proto_state.P_WAIT_HIGH ; 0                      ; 1                       ; 1                       ;
+; proto_state.P_WAIT_LOW  ; 1                      ; 0                       ; 1                       ;
++-------------------------+------------------------+-------------------------+-------------------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |fuzzy_top|uart_receiver:u_uart|uart_state                                                                ;
++-------------------------+------------------------+-------------------------+-------------------------+--------------------+
+; Name                    ; uart_state.RX_STOP_BIT ; uart_state.RX_DATA_BITS ; uart_state.RX_START_BIT ; uart_state.RX_IDLE ;
++-------------------------+------------------------+-------------------------+-------------------------+--------------------+
+; uart_state.RX_IDLE      ; 0                      ; 0                       ; 0                       ; 0                  ;
+; uart_state.RX_START_BIT ; 0                      ; 0                       ; 1                       ; 1                  ;
+; uart_state.RX_DATA_BITS ; 0                      ; 1                       ; 0                       ; 1                  ;
+; uart_state.RX_STOP_BIT  ; 1                      ; 0                       ; 0                       ; 1                  ;
++-------------------------+------------------------+-------------------------+-------------------------+--------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                       ;
++--------------------------------------------------------------+-----------------------------------------------------------+
+; Register name                                                ; Reason for Removal                                        ;
++--------------------------------------------------------------+-----------------------------------------------------------+
+; defuzzifier:u_defuzz|sum_weights[18..31]                     ; Merged with defuzzifier:u_defuzz|sum_weights[17]          ;
+; adaptation_engine:u_adapt|adapt_wr_addr[6,7]                 ; Merged with adaptation_engine:u_adapt|adapt_wr_addr[5]    ;
+; adaptation_engine:u_adapt|new_params_2[1][15]                ; Merged with adaptation_engine:u_adapt|new_params_2[0][15] ;
+; adaptation_engine:u_adapt|new_params_2[8][15]                ; Merged with adaptation_engine:u_adapt|new_params_2[7][15] ;
+; adaptation_engine:u_adapt|new_params_1[1][15]                ; Merged with adaptation_engine:u_adapt|new_params_1[0][15] ;
+; adaptation_engine:u_adapt|new_params_1[8][15]                ; Merged with adaptation_engine:u_adapt|new_params_1[7][15] ;
+; adaptation_engine:u_adapt|new_params_2[1][14]                ; Merged with adaptation_engine:u_adapt|new_params_2[0][14] ;
+; adaptation_engine:u_adapt|new_params_2[8][14]                ; Merged with adaptation_engine:u_adapt|new_params_2[7][14] ;
+; adaptation_engine:u_adapt|new_params_1[1][14]                ; Merged with adaptation_engine:u_adapt|new_params_1[0][14] ;
+; adaptation_engine:u_adapt|new_params_1[8][14]                ; Merged with adaptation_engine:u_adapt|new_params_1[7][14] ;
+; adaptation_engine:u_adapt|new_params_2[1][13]                ; Merged with adaptation_engine:u_adapt|new_params_2[0][13] ;
+; adaptation_engine:u_adapt|new_params_2[8][13]                ; Merged with adaptation_engine:u_adapt|new_params_2[7][13] ;
+; adaptation_engine:u_adapt|new_params_1[1][13]                ; Merged with adaptation_engine:u_adapt|new_params_1[0][13] ;
+; adaptation_engine:u_adapt|new_params_1[8][13]                ; Merged with adaptation_engine:u_adapt|new_params_1[7][13] ;
+; adaptation_engine:u_adapt|new_params_2[1][12]                ; Merged with adaptation_engine:u_adapt|new_params_2[0][12] ;
+; adaptation_engine:u_adapt|new_params_2[8][12]                ; Merged with adaptation_engine:u_adapt|new_params_2[7][12] ;
+; adaptation_engine:u_adapt|new_params_1[1][12]                ; Merged with adaptation_engine:u_adapt|new_params_1[0][12] ;
+; adaptation_engine:u_adapt|new_params_1[8][12]                ; Merged with adaptation_engine:u_adapt|new_params_1[7][12] ;
+; adaptation_engine:u_adapt|new_params_2[1][11]                ; Merged with adaptation_engine:u_adapt|new_params_2[0][11] ;
+; adaptation_engine:u_adapt|new_params_2[8][11]                ; Merged with adaptation_engine:u_adapt|new_params_2[7][11] ;
+; adaptation_engine:u_adapt|new_params_1[1][11]                ; Merged with adaptation_engine:u_adapt|new_params_1[0][11] ;
+; adaptation_engine:u_adapt|new_params_1[8][11]                ; Merged with adaptation_engine:u_adapt|new_params_1[7][11] ;
+; adaptation_engine:u_adapt|new_params_2[1][10]                ; Merged with adaptation_engine:u_adapt|new_params_2[0][10] ;
+; adaptation_engine:u_adapt|new_params_2[8][10]                ; Merged with adaptation_engine:u_adapt|new_params_2[7][10] ;
+; adaptation_engine:u_adapt|new_params_1[1][10]                ; Merged with adaptation_engine:u_adapt|new_params_1[0][10] ;
+; adaptation_engine:u_adapt|new_params_1[8][10]                ; Merged with adaptation_engine:u_adapt|new_params_1[7][10] ;
+; adaptation_engine:u_adapt|new_params_2[1][9]                 ; Merged with adaptation_engine:u_adapt|new_params_2[0][9]  ;
+; adaptation_engine:u_adapt|new_params_2[8][9]                 ; Merged with adaptation_engine:u_adapt|new_params_2[7][9]  ;
+; adaptation_engine:u_adapt|new_params_1[1][9]                 ; Merged with adaptation_engine:u_adapt|new_params_1[0][9]  ;
+; adaptation_engine:u_adapt|new_params_1[8][9]                 ; Merged with adaptation_engine:u_adapt|new_params_1[7][9]  ;
+; adaptation_engine:u_adapt|new_params_2[1][8]                 ; Merged with adaptation_engine:u_adapt|new_params_2[0][8]  ;
+; adaptation_engine:u_adapt|new_params_2[8][8]                 ; Merged with adaptation_engine:u_adapt|new_params_2[7][8]  ;
+; adaptation_engine:u_adapt|new_params_1[1][8]                 ; Merged with adaptation_engine:u_adapt|new_params_1[0][8]  ;
+; adaptation_engine:u_adapt|new_params_1[8][8]                 ; Merged with adaptation_engine:u_adapt|new_params_1[7][8]  ;
+; adaptation_engine:u_adapt|new_params_2[1][7]                 ; Merged with adaptation_engine:u_adapt|new_params_2[0][7]  ;
+; adaptation_engine:u_adapt|new_params_2[8][7]                 ; Merged with adaptation_engine:u_adapt|new_params_2[7][7]  ;
+; adaptation_engine:u_adapt|new_params_1[1][7]                 ; Merged with adaptation_engine:u_adapt|new_params_1[0][7]  ;
+; adaptation_engine:u_adapt|new_params_1[8][7]                 ; Merged with adaptation_engine:u_adapt|new_params_1[7][7]  ;
+; adaptation_engine:u_adapt|new_params_2[1][6]                 ; Merged with adaptation_engine:u_adapt|new_params_2[0][6]  ;
+; adaptation_engine:u_adapt|new_params_2[8][6]                 ; Merged with adaptation_engine:u_adapt|new_params_2[7][6]  ;
+; adaptation_engine:u_adapt|new_params_1[1][6]                 ; Merged with adaptation_engine:u_adapt|new_params_1[0][6]  ;
+; adaptation_engine:u_adapt|new_params_1[8][6]                 ; Merged with adaptation_engine:u_adapt|new_params_1[7][6]  ;
+; adaptation_engine:u_adapt|new_params_2[1][5]                 ; Merged with adaptation_engine:u_adapt|new_params_2[0][5]  ;
+; adaptation_engine:u_adapt|new_params_2[8][5]                 ; Merged with adaptation_engine:u_adapt|new_params_2[7][5]  ;
+; adaptation_engine:u_adapt|new_params_1[1][5]                 ; Merged with adaptation_engine:u_adapt|new_params_1[0][5]  ;
+; adaptation_engine:u_adapt|new_params_1[8][5]                 ; Merged with adaptation_engine:u_adapt|new_params_1[7][5]  ;
+; adaptation_engine:u_adapt|new_params_2[1][4]                 ; Merged with adaptation_engine:u_adapt|new_params_2[0][4]  ;
+; adaptation_engine:u_adapt|new_params_2[8][4]                 ; Merged with adaptation_engine:u_adapt|new_params_2[7][4]  ;
+; adaptation_engine:u_adapt|new_params_1[1][4]                 ; Merged with adaptation_engine:u_adapt|new_params_1[0][4]  ;
+; adaptation_engine:u_adapt|new_params_1[8][4]                 ; Merged with adaptation_engine:u_adapt|new_params_1[7][4]  ;
+; adaptation_engine:u_adapt|new_params_2[1][3]                 ; Merged with adaptation_engine:u_adapt|new_params_2[0][3]  ;
+; adaptation_engine:u_adapt|new_params_2[8][3]                 ; Merged with adaptation_engine:u_adapt|new_params_2[7][3]  ;
+; adaptation_engine:u_adapt|new_params_1[1][3]                 ; Merged with adaptation_engine:u_adapt|new_params_1[0][3]  ;
+; adaptation_engine:u_adapt|new_params_1[8][3]                 ; Merged with adaptation_engine:u_adapt|new_params_1[7][3]  ;
+; adaptation_engine:u_adapt|new_params_2[1][2]                 ; Merged with adaptation_engine:u_adapt|new_params_2[0][2]  ;
+; adaptation_engine:u_adapt|new_params_2[8][2]                 ; Merged with adaptation_engine:u_adapt|new_params_2[7][2]  ;
+; adaptation_engine:u_adapt|new_params_1[1][2]                 ; Merged with adaptation_engine:u_adapt|new_params_1[0][2]  ;
+; adaptation_engine:u_adapt|new_params_1[8][2]                 ; Merged with adaptation_engine:u_adapt|new_params_1[7][2]  ;
+; adaptation_engine:u_adapt|new_params_2[1][1]                 ; Merged with adaptation_engine:u_adapt|new_params_2[0][1]  ;
+; adaptation_engine:u_adapt|new_params_2[8][1]                 ; Merged with adaptation_engine:u_adapt|new_params_2[7][1]  ;
+; adaptation_engine:u_adapt|new_params_1[1][1]                 ; Merged with adaptation_engine:u_adapt|new_params_1[0][1]  ;
+; adaptation_engine:u_adapt|new_params_1[8][1]                 ; Merged with adaptation_engine:u_adapt|new_params_1[7][1]  ;
+; adaptation_engine:u_adapt|new_params_2[1][0]                 ; Merged with adaptation_engine:u_adapt|new_params_2[0][0]  ;
+; adaptation_engine:u_adapt|new_params_2[8][0]                 ; Merged with adaptation_engine:u_adapt|new_params_2[7][0]  ;
+; adaptation_engine:u_adapt|new_params_1[1][0]                 ; Merged with adaptation_engine:u_adapt|new_params_1[0][0]  ;
+; adaptation_engine:u_adapt|new_params_1[8][0]                 ; Merged with adaptation_engine:u_adapt|new_params_1[7][0]  ;
+; adaptation_engine:u_adapt|std2[13..15]                       ; Merged with adaptation_engine:u_adapt|std2[12]            ;
+; adaptation_engine:u_adapt|std1[13..15]                       ; Merged with adaptation_engine:u_adapt|std1[12]            ;
+; adaptation_engine:u_adapt|div_divisor[17..31]                ; Merged with adaptation_engine:u_adapt|div_divisor[16]     ;
+; adaptation_engine:u_adapt|sqrt_input_reg[7]                  ; Merged with adaptation_engine:u_adapt|sqrt_input_reg[6]   ;
+; adaptation_engine:u_adapt|sqrt_input_reg[5]                  ; Merged with adaptation_engine:u_adapt|sqrt_input_reg[4]   ;
+; adaptation_engine:u_adapt|sqrt_input_reg[3]                  ; Merged with adaptation_engine:u_adapt|sqrt_input_reg[2]   ;
+; adaptation_engine:u_adapt|sqrt_input_reg[1]                  ; Merged with adaptation_engine:u_adapt|sqrt_input_reg[0]   ;
+; adaptation_engine:u_adapt|adapt_wr_addr[5]                   ; Stuck at GND due to stuck port data_in                    ;
+; defuzzifier:u_defuzz|div_divisor[18..31]                     ; Stuck at GND due to stuck port data_in                    ;
+; adaptation_engine:u_adapt|std1[12]                           ; Stuck at GND due to stuck port data_in                    ;
+; adaptation_engine:u_adapt|std2[12]                           ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[0]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[0]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[0]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[0] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[0]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[0] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[1]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[1]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[1]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[1] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[1]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[1] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[2]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[2]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[2]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[2] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[2]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[2] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[3]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[3]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[3]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[3] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[3]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[3] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[4]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[4]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[4]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[4] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[4]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[4] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[5]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[5]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[5]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[5] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[5]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[5] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[6]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[6]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[6]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[6] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[6]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[6] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[7]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[7]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[7]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[7] ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[7]  ; Stuck at GND due to stuck port data_in                    ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[7] ; Stuck at GND due to stuck port data_in                    ;
+; adaptation_engine:u_adapt|div_divisor[16]                    ; Stuck at GND due to stuck port data_in                    ;
+; adaptation_engine:u_adapt|sqrt_input_reg[0,2,4,6]            ; Stuck at GND due to stuck port data_in                    ;
+; Total Number of Removed Registers = 175                      ;                                                           ;
++--------------------------------------------------------------+-----------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                              ;
++--------------------------------------------------------------+---------------------------+---------------------------------------------------------------+
+; Register name                                                ; Reason for Removal        ; Registers Removed due to This Register                        ;
++--------------------------------------------------------------+---------------------------+---------------------------------------------------------------+
+; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[0]  ; Stuck at GND              ; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[1],  ;
+;                                                              ; due to stuck port data_in ; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[2],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[3],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[4],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[5],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[6],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[7]   ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[0]  ; Stuck at GND              ; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[1],  ;
+;                                                              ; due to stuck port data_in ; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[2],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[3],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[4],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[5],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[6],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[7]   ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[0]  ; Stuck at GND              ; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[1],  ;
+;                                                              ; due to stuck port data_in ; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[2],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[3],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[4],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[5],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[6],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[7]   ;
+; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[0] ; Stuck at GND              ; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[1], ;
+;                                                              ; due to stuck port data_in ; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[2], ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[3], ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[4], ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[5], ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[6], ;
+;                                                              ;                           ; fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[7]  ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[0]  ; Stuck at GND              ; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[1],  ;
+;                                                              ; due to stuck port data_in ; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[2],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[3],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[4],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[5],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[6],  ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[7]   ;
+; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[0] ; Stuck at GND              ; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[1], ;
+;                                                              ; due to stuck port data_in ; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[2], ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[3], ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[4], ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[5], ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[6], ;
+;                                                              ;                           ; fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[7]  ;
+; adaptation_engine:u_adapt|sqrt_input_reg[0]                  ; Stuck at GND              ; adaptation_engine:u_adapt|sqrt_input_reg[2],                  ;
+;                                                              ; due to stuck port data_in ; adaptation_engine:u_adapt|sqrt_input_reg[4],                  ;
+;                                                              ;                           ; adaptation_engine:u_adapt|sqrt_input_reg[6]                   ;
++--------------------------------------------------------------+---------------------------+---------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 2340  ;
+; Number of registers using Synchronous Clear  ; 1104  ;
+; Number of registers using Synchronous Load   ; 718   ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 2195  ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; uart_receiver:u_uart|rx_sync2          ; 13      ;
+; uart_receiver:u_uart|rx_sync1          ; 1       ;
+; Total number of inverted registers = 2 ;         ;
++----------------------------------------+---------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
+; 3:1                ; 18 bits   ; 36 LEs        ; 0 LEs                ; 36 LEs                 ; Yes        ; |fuzzy_top|result_value[3]~reg0                                          ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|n1[0]                               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|m2_1[30]                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|n2[6]                               ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|m2_2[26]                            ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|adapt_wr_addr[4]                    ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|defuzzifier:u_defuzz|crisp_output[0]                          ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|mu[9]            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|mu[10]            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|mu[6]             ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|mu[5]            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|mu[7]             ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|mu[6]             ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[31][11]                        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[15][11]                        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[17][4]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[16][5]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[12][12]                        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[14][4]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[13][3]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[9][0]                          ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[11][5]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[10][7]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[6][11]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[8][10]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[7][10]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[3][3]                          ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[5][4]                          ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[4][13]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[0][9]                          ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[2][1]                          ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[1][12]                         ;
+; 3:1                ; 31 bits   ; 62 LEs        ; 0 LEs                ; 62 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|div_shift_reg[18]                   ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|div_quotient[23]                    ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |fuzzy_top|uart_receiver:u_uart|write_data[4]                            ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |fuzzy_top|config_registers:u_config|regs[18][0]                         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |fuzzy_top|config_registers:u_config|regs[19][0]                         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |fuzzy_top|config_registers:u_config|regs[20][0]                         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |fuzzy_top|config_registers:u_config|regs[21][1]                         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |fuzzy_top|config_registers:u_config|regs[22][1]                         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |fuzzy_top|config_registers:u_config|regs[23][1]                         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |fuzzy_top|config_registers:u_config|regs[24][1]                         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |fuzzy_top|config_registers:u_config|regs[25][1]                         ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |fuzzy_top|config_registers:u_config|regs[26][1]                         ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 0 LEs                ; 30 LEs                 ; Yes        ; |fuzzy_top|defuzzifier:u_defuzz|result_reg[6]                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[28][9]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[27][1]                         ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |fuzzy_top|uart_receiver:u_uart|data_high[0]                             ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 0 LEs                ; 16 LEs                 ; Yes        ; |fuzzy_top|uart_receiver:u_uart|addr_reg[2]                              ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[29][1]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[30][2]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|mean2[11]                           ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|mean1[7]                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|config_registers:u_config|regs[32][2]                         ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|p3_target_2[13]                     ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|p3_target_1[14]                     ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 0 LEs                ; 32 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|delta[4]                            ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|div_count[2]                        ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |fuzzy_top|defuzzifier:u_defuzz|final_class[0]                           ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|div_remainder[3]                    ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_divisor[15]  ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_divisor[14]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_divisor[2]    ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_divisor[5]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_divisor[0]    ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_divisor[9]    ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|adapt_counter[6]                    ;
+; 5:1                ; 36 bits   ; 108 LEs       ; 36 LEs               ; 72 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[4]  ;
+; 5:1                ; 36 bits   ; 108 LEs       ; 36 LEs               ; 72 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[3]   ;
+; 5:1                ; 36 bits   ; 108 LEs       ; 36 LEs               ; 72 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_quotient[9]   ;
+; 5:1                ; 36 bits   ; 108 LEs       ; 36 LEs               ; 72 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_count[4]     ;
+; 5:1                ; 36 bits   ; 108 LEs       ; 36 LEs               ; 72 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_count[3]      ;
+; 5:1                ; 36 bits   ; 108 LEs       ; 36 LEs               ; 72 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_count[2]      ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_remainder[11] ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_remainder[15] ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_remainder[14] ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_remainder[3] ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_remainder[2]  ;
+; 6:1                ; 16 bits   ; 64 LEs        ; 0 LEs                ; 64 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_remainder[2] ;
+; 7:1                ; 12 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|std2[2]                             ;
+; 7:1                ; 12 bits   ; 48 LEs        ; 0 LEs                ; 48 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|std1[11]                            ;
+; 7:1                ; 15 bits   ; 60 LEs        ; 0 LEs                ; 60 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|sqrt_root[5]                        ;
+; 7:1                ; 16 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|sqrt_input_reg[18]                  ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 32 LEs               ; 48 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|div_dividend[15] ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 32 LEs               ; 48 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|div_dividend[8]   ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 32 LEs               ; 48 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|div_dividend[10]  ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 32 LEs               ; 48 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|div_dividend[21] ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 32 LEs               ; 48 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|div_dividend[14]  ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 32 LEs               ; 48 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|div_dividend[14]  ;
+; 7:1                ; 9 bits    ; 36 LEs        ; 0 LEs                ; 36 LEs                 ; Yes        ; |fuzzy_top|uart_receiver:u_uart|clk_count[1]                             ;
+; 7:1                ; 16 bits   ; 64 LEs        ; 16 LEs               ; 48 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|div_dividend[7]                     ;
+; 7:1                ; 16 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|div_dividend[14]                    ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 8 LEs                ; 12 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|sqrt_iter[0]                        ;
+; 9:1                ; 16 bits   ; 96 LEs        ; 32 LEs               ; 64 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|div_divisor[1]                      ;
+; 8:1                ; 14 bits   ; 70 LEs        ; 0 LEs                ; 70 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|sqrt_rem[10]                        ;
+; 20:1               ; 16 bits   ; 208 LEs       ; 144 LEs              ; 64 LEs                 ; Yes        ; |fuzzy_top|adaptation_engine:u_adapt|adapt_wr_data[13]                   ;
+; 13:1               ; 16 bits   ; 128 LEs       ; 32 LEs               ; 96 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|mu_reg[2]         ;
+; 13:1               ; 16 bits   ; 128 LEs       ; 32 LEs               ; 96 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|mu_reg[1]         ;
+; 13:1               ; 16 bits   ; 128 LEs       ; 32 LEs               ; 96 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|mu_reg[12]        ;
+; 13:1               ; 16 bits   ; 128 LEs       ; 32 LEs               ; 96 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|mu_reg[8]        ;
+; 13:1               ; 16 bits   ; 128 LEs       ; 32 LEs               ; 96 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|mu_reg[12]        ;
+; 13:1               ; 16 bits   ; 128 LEs       ; 32 LEs               ; 96 LEs                 ; Yes        ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|mu_reg[2]        ;
+; 3:1                ; 23 bits   ; 46 LEs        ; 46 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|defuzzifier:u_defuzz|div_quotient                             ;
+; 3:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|defuzzifier:u_defuzz|div_dividend                             ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |fuzzy_top|uart_receiver:u_uart|proto_state                              ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |fuzzy_top|uart_receiver:u_uart|bit_index                                ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|aggregator:u_agg|max_alert                                    ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|adaptation_engine:u_adapt|fn_clamp                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|adaptation_engine:u_adapt|fn_clamp                            ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|adaptation_engine:u_adapt|fn_clamp                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|adaptation_engine:u_adapt|fn_clamp                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|adaptation_engine:u_adapt|fn_clamp                            ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|adaptation_engine:u_adapt|fn_clamp                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|adaptation_engine:u_adapt|fn_clamp                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|adaptation_engine:u_adapt|fn_clamp                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|adaptation_engine:u_adapt|fn_clamp                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|adaptation_engine:u_adapt|fn_clamp                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|aggregator:u_agg|max_crit                                     ;
+; 4:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; No         ; |fuzzy_top|defuzzifier:u_defuzz|div_remainder                            ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |fuzzy_top|uart_receiver:u_uart|uart_state                               ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |fuzzy_top|uart_receiver:u_uart|uart_state                               ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |fuzzy_top|state                                                         ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 12 LEs               ; 2 LEs                  ; No         ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_high_inst|state            ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 12 LEs               ; 2 LEs                  ; No         ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_med_inst|state             ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 12 LEs               ; 2 LEs                  ; No         ; |fuzzy_top|fuzzifier:u_fuzz2|triangular_mf:mf_low_inst|state             ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 12 LEs               ; 2 LEs                  ; No         ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_high_inst|state            ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 12 LEs               ; 2 LEs                  ; No         ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_med_inst|state             ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 12 LEs               ; 2 LEs                  ; No         ; |fuzzy_top|fuzzifier:u_fuzz1|triangular_mf:mf_low_inst|state             ;
+; 16:1               ; 2 bits    ; 20 LEs        ; 8 LEs                ; 12 LEs                 ; No         ; |fuzzy_top|adaptation_engine:u_adapt|state                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |fuzzy_top ;
++----------------+-------+--------------------------------------------------+
+; Parameter Name ; Value ; Type                                             ;
++----------------+-------+--------------------------------------------------+
+; CLKS_PER_BIT   ; 434   ; Signed Integer                                   ;
++----------------+-------+--------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart_receiver:u_uart ;
++----------------+-------+------------------------------------------+
+; Parameter Name ; Value ; Type                                     ;
++----------------+-------+------------------------------------------+
+; clks_per_bit   ; 434   ; Signed Integer                           ;
++----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 2340                        ;
+;     ENA               ; 683                         ;
+;     ENA SCLR          ; 796                         ;
+;     ENA SCLR SLD      ; 262                         ;
+;     ENA SLD           ; 454                         ;
+;     SCLR              ; 44                          ;
+;     SCLR SLD          ; 2                           ;
+;     plain             ; 99                          ;
+; arriav_lcell_comb     ; 5080                        ;
+;     arith             ; 652                         ;
+;         0 data inputs ; 7                           ;
+;         1 data inputs ; 110                         ;
+;         2 data inputs ; 321                         ;
+;         3 data inputs ; 34                          ;
+;         4 data inputs ; 28                          ;
+;         5 data inputs ; 152                         ;
+;     extend            ; 101                         ;
+;         7 data inputs ; 101                         ;
+;     normal            ; 3474                        ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 3                           ;
+;         2 data inputs ; 481                         ;
+;         3 data inputs ; 441                         ;
+;         4 data inputs ; 597                         ;
+;         5 data inputs ; 540                         ;
+;         6 data inputs ; 1411                        ;
+;     shared            ; 853                         ;
+;         0 data inputs ; 5                           ;
+;         1 data inputs ; 47                          ;
+;         2 data inputs ; 750                         ;
+;         3 data inputs ; 51                          ;
+; arriav_mac            ; 13                          ;
+; boundary_port         ; 119                         ;
+;                       ;                             ;
+; Max LUT depth         ; 34.70                       ;
+; Average LUT depth     ; 12.20                       ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:14     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
+    Info: Processing started: Fri Feb 27 00:04:56 2026
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off adaptative_fuzzy -c adaptative_fuzzy
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 10 of the 10 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file uart_receiver.vhd
+    Info (12022): Found design unit 1: uart_receiver-rtl File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/uart_receiver.vhd Line: 41
+    Info (12023): Found entity 1: uart_receiver File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/uart_receiver.vhd Line: 25
+Info (12021): Found 2 design units, including 1 entities, in source file triangular_mf.vhd
+    Info (12022): Found design unit 1: triangular_mf-rtl File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/triangular_mf.vhd Line: 35
+    Info (12023): Found entity 1: triangular_mf File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/triangular_mf.vhd Line: 21
+Info (12021): Found 2 design units, including 1 entities, in source file rule_evaluator.vhd
+    Info (12022): Found design unit 1: rule_evaluator-rtl File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/rule_evaluator.vhd Line: 44
+    Info (12023): Found entity 1: rule_evaluator File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/rule_evaluator.vhd Line: 19
+Info (12021): Found 2 design units, including 1 entities, in source file fuzzy_top.vhd
+    Info (12022): Found design unit 1: fuzzy_top-rtl File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd Line: 71
+    Info (12023): Found entity 1: fuzzy_top File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd Line: 39
+Info (12021): Found 2 design units, including 1 entities, in source file fuzzifier.vhd
+    Info (12022): Found design unit 1: fuzzifier-rtl File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzifier.vhd Line: 47
+    Info (12023): Found entity 1: fuzzifier File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzifier.vhd Line: 14
+Info (12021): Found 2 design units, including 1 entities, in source file defuzzifier.vhd
+    Info (12022): Found design unit 1: defuzzifier-rtl File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/defuzzifier.vhd Line: 45
+    Info (12023): Found entity 1: defuzzifier File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/defuzzifier.vhd Line: 22
+Info (12021): Found 2 design units, including 1 entities, in source file config_registers.vhd
+    Info (12022): Found design unit 1: config_registers-rtl File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/config_registers.vhd Line: 90
+    Info (12023): Found entity 1: config_registers File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/config_registers.vhd Line: 30
+Info (12021): Found 2 design units, including 1 entities, in source file aggregator.vhd
+    Info (12022): Found design unit 1: aggregator-rtl File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/aggregator.vhd Line: 49
+    Info (12023): Found entity 1: aggregator File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/aggregator.vhd Line: 18
+Info (12021): Found 2 design units, including 1 entities, in source file adaptation_engine.vhd
+    Info (12022): Found design unit 1: adaptation_engine-rtl File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/adaptation_engine.vhd Line: 80
+    Info (12023): Found entity 1: adaptation_engine File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/adaptation_engine.vhd Line: 27
+Info (12127): Elaborating entity "fuzzy_top" for the top level hierarchy
+Info (12128): Elaborating entity "uart_receiver" for hierarchy "uart_receiver:u_uart" File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd Line: 290
+Info (12128): Elaborating entity "config_registers" for hierarchy "config_registers:u_config" File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd Line: 305
+Info (12128): Elaborating entity "fuzzifier" for hierarchy "fuzzifier:u_fuzz1" File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd Line: 350
+Info (12128): Elaborating entity "triangular_mf" for hierarchy "fuzzifier:u_fuzz1|triangular_mf:mf_low_inst" File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzifier.vhd Line: 83
+Info (12128): Elaborating entity "rule_evaluator" for hierarchy "rule_evaluator:u_rules" File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd Line: 394
+Info (12128): Elaborating entity "aggregator" for hierarchy "aggregator:u_agg" File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd Line: 407
+Info (12128): Elaborating entity "defuzzifier" for hierarchy "defuzzifier:u_defuzz" File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd Line: 425
+Warning (10036): Verilog HDL or VHDL warning at defuzzifier.vhd(60): object "sum_products" assigned a value but never read File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/defuzzifier.vhd Line: 60
+Info (12128): Elaborating entity "adaptation_engine" for hierarchy "adaptation_engine:u_adapt" File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd Line: 445
+Warning (10036): Verilog HDL or VHDL warning at adaptation_engine.vhd(137): object "delta2" assigned a value but never read File: C:/Dev/TCC/AdaptativeFuzzyForGenericResources/adaptation_engine.vhd Line: 137
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 6490 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 100 input pins
+    Info (21059): Implemented 19 output pins
+    Info (21061): Implemented 6358 logic cells
+    Info (21062): Implemented 13 DSP elements
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 5037 megabytes
+    Info: Processing ended: Fri Feb 27 00:05:19 2026
+    Info: Elapsed time: 00:00:23
+    Info: Total CPU time (on all processors): 00:00:34
+
+
