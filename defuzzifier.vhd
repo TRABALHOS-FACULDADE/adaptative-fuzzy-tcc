@@ -83,6 +83,11 @@ begin
                 final_class  <= "00";
                 done         <= '0';
                 result_reg   <= ZERO_FP;
+                div_dividend  <= (others => '0');
+                div_divisor   <= (others => '0');
+                div_quotient  <= (others => '0');
+                div_remainder <= (others => '0');
+                div_count     <= 0;
             else
                 done <= '0';
 

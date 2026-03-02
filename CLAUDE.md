@@ -201,9 +201,10 @@ S_IDLE
 - Multiplicacao 16x16→32 no estado `S_MULTIPLY` (1 ciclo, mapeado para DSP)
 - Divisao restoring 32-bit no estado `S_DIVIDE` (~34 ciclos)
 - Trick de inicializacao: detecta inicio da divisao por `div_count=0 AND div_dividend=0 AND div_quotient=0 AND div_remainder=0`
+- **CRITICO:** Os sinais do divisor (`div_dividend`, `div_divisor`, `div_quotient`, `div_remainder`, `div_count`) DEVEM ser resetados no bloco `if rst='1'`. Sem isso, na primeira inferencia pos-reset os sinais sao 'U', a condicao de inicializacao falha mas o `elsif div_count=0` dispara erroneamente com `div_quotient='U'`, classificando como CRITICAL.
 - Output default quando pesos = 0: `0.5 = 128`
 - Classificacao: `crisp <= val_ok → OK`, `crisp <= val_alert → ALERT`, `else → CRITICAL`
-- Resets os sinais do divisor no estado `S_DONE` para proxima operacao
+- Resets os sinais do divisor no estado `S_DONE` para proxima operacao (e tambem no rst)
 
 ---
 
@@ -292,7 +293,7 @@ Configuracao: 8N1, 115200 baud, 50 MHz clock.
 
 ## 12. Pontos de Atencao e Armadilhas Conhecidas
 
-1. **`defuzzifier.vhd` — deteccao de inicio da divisao:** usa a condicao composta `div_count=0 AND div_dividend=0 AND div_quotient=0 AND div_remainder=0` para distinguir "primeira entrada no estado S_DIVIDE" de "divisao em andamento". Nao alterar sem entender essa logica.
+1. **`defuzzifier.vhd` — deteccao de inicio da divisao:** usa a condicao composta `div_count=0 AND div_dividend=0 AND div_quotient=0 AND div_remainder=0` para distinguir "primeira entrada no estado S_DIVIDE" de "divisao em andamento". Os sinais do divisor DEVEM estar no bloco `if rst='1'` (corrigido em 28/02/2026); sem isso, a primeira inferencia classifica erroneamente como CRITICAL.
 
 2. **`adaptation_engine.vhd` — sqrt por digit-by-digit, nao Newton-Raphson:** o comentario no header do arquivo menciona "Newton-Raphson", mas o codigo implementa digit-by-digit com 12 iteracoes. O `PROJETO_VHDL.md` tambem estava desatualizado nesse ponto.
 
