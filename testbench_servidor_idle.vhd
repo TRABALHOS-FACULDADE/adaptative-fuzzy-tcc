@@ -1,14 +1,3 @@
--- =============================================================================
--- testbench_servidor_idle.vhd
--- Cenario 1: Servidor em Idle
---
--- Inputs: CPU=13 (~5%), MEM=26 (~10%) em Q8.8
--- Esperado: result_class = "00" (OK), result_value proximo de 85
---
--- Nota: CLKS_PER_BIT = 10 (acelerado para simulacao)
---       Em hardware real seria 434 (50MHz / 115200 baud)
--- =============================================================================
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -26,12 +15,17 @@ architecture sim of testbench_servidor_idle is
     -- =========================================================================
     component fuzzy_top is
         generic (
-            CLKS_PER_BIT : integer
+            CLKS_PER_BIT     : integer;
+            CAN_CLKS_PER_BIT : integer
         );
         port (
             clk          : in  std_logic;
             rst          : in  std_logic;
             uart_rx      : in  std_logic;
+            can_rx       : in  std_logic;
+            spi_cs_n     : in  std_logic;
+            spi_sclk     : in  std_logic;
+            spi_mosi     : in  std_logic;
             sensor1_data : in  std_logic_vector(15 downto 0);
             sensor2_data : in  std_logic_vector(15 downto 0);
             in1_min_val  : in  std_logic_vector(15 downto 0);
@@ -53,8 +47,12 @@ architecture sim of testbench_servidor_idle is
     signal clk          : std_logic := '0';
     signal rst          : std_logic := '1';
 
-    -- UART (configuracao do sistema)
+    -- Interfaces de configuracao externa
     signal uart_rx      : std_logic := '1';   -- idle = '1' (linha em repouso)
+    signal can_rx       : std_logic := '1';   -- idle = recessive ('1')
+    signal spi_cs_n     : std_logic := '1';   -- inactive = chip select desativado
+    signal spi_sclk     : std_logic := '0';   -- idle = '0' (CPOL=0)
+    signal spi_mosi     : std_logic := '0';
 
     -- Entradas dos sensores (Q8.8)
     signal sensor1_data : std_logic_vector(15 downto 0) := (others => '0');
@@ -81,12 +79,17 @@ begin
     -- =========================================================================
     DUT : fuzzy_top
         generic map (
-            CLKS_PER_BIT => CLKS_PER_BIT
+            CLKS_PER_BIT     => CLKS_PER_BIT,
+            CAN_CLKS_PER_BIT => 500
         )
         port map (
             clk          => clk,
             rst          => rst,
             uart_rx      => uart_rx,
+            can_rx       => can_rx,
+            spi_cs_n     => spi_cs_n,
+            spi_sclk     => spi_sclk,
+            spi_mosi     => spi_mosi,
             sensor1_data => sensor1_data,
             sensor2_data => sensor2_data,
             in1_min_val  => in1_min_val,

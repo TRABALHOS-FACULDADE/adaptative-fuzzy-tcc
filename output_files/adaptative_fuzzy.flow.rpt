@@ -1,5 +1,5 @@
 Flow report for adaptative_fuzzy
-Fri Feb 27 00:13:38 2026
+Sat Mar  7 10:52:47 2026
 Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 
 
@@ -41,16 +41,16 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +---------------------------------+------------------------------------------------+
-; Flow Status                     ; Successful - Fri Feb 27 00:13:38 2026          ;
+; Flow Status                     ; Successful - Sat Mar  7 10:52:47 2026          ;
 ; Quartus Prime Version           ; 22.1std.1 Build 917 02/14/2023 SC Lite Edition ;
 ; Revision Name                   ; adaptative_fuzzy                               ;
-; Top-level Entity Name           ; fuzzy_top                                      ;
+; Top-level Entity Name           ; system_top                                     ;
 ; Family                          ; Cyclone V                                      ;
 ; Device                          ; 5CGXFC7C7F23C8                                 ;
 ; Timing Models                   ; Final                                          ;
-; Logic utilization (in ALMs)     ; 3,446 / 56,480 ( 6 % )                         ;
-; Total registers                 ; 2196                                           ;
-; Total pins                      ; 119 / 268 ( 44 % )                             ;
+; Logic utilization (in ALMs)     ; 3,516 / 56,480 ( 6 % )                         ;
+; Total registers                 ; 2581                                           ;
+; Total pins                      ; 123 / 268 ( 46 % )                             ;
 ; Total virtual pins              ; 0                                              ;
 ; Total block memory bits         ; 0 / 7,024,640 ( 0 % )                          ;
 ; Total DSP Blocks                ; 13 / 156 ( 8 % )                               ;
@@ -68,7 +68,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 02/27/2026 00:04:56 ;
+; Start date & time ; 03/07/2026 10:44:20 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; adaptative_fuzzy    ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+------------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value    ; Entity Name ; Section Id                        ;
 +-------------------------------------+----------------------------------------+------------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 2546206970676.177216149638604          ; --               ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 2546206970676.177289106027924          ; --               ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --               ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --               ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --               ; --          ; eda_board_design_signal_integrity ;
@@ -89,13 +89,13 @@ https://fpgasoftware.intel.com/eula.
 ; EDA_TIME_SCALE                      ; 1 ps                                   ; --               ; --          ; eda_simulation                    ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --               ; --          ; --                                ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --               ; --          ; --                                ;
-; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --               ; fuzzy_top   ; Top                               ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --               ; fuzzy_top   ; Top                               ;
-; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --               ; fuzzy_top   ; Top                               ;
+; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --               ; system_top  ; Top                               ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --               ; system_top  ; Top                               ;
+; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --               ; system_top  ; Top                               ;
 ; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --               ; --          ; --                                ;
 ; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --               ; --          ; --                                ;
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --               ; --          ; --                                ;
-; TOP_LEVEL_ENTITY                    ; fuzzy_top                              ; adaptative_fuzzy ; --          ; --                                ;
+; TOP_LEVEL_ENTITY                    ; system_top                             ; adaptative_fuzzy ; --          ; --                                ;
 +-------------------------------------+----------------------------------------+------------------+-------------+-----------------------------------+
 
 
@@ -104,12 +104,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:22     ; 1.0                     ; 5037 MB             ; 00:00:34                           ;
-; Fitter               ; 00:07:51     ; 1.1                     ; 7417 MB             ; 00:35:28                           ;
-; Assembler            ; 00:00:07     ; 1.0                     ; 5420 MB             ; 00:00:08                           ;
+; Analysis & Synthesis ; 00:00:50     ; 1.0                     ; 5058 MB             ; 00:00:37                           ;
+; Fitter               ; 00:07:03     ; 1.1                     ; 7437 MB             ; 00:31:05                           ;
+; Assembler            ; 00:00:16     ; 1.0                     ; 5420 MB             ; 00:00:08                           ;
 ; Timing Analyzer      ; 00:00:11     ; 3.5                     ; 5540 MB             ; 00:00:31                           ;
 ; EDA Netlist Writer   ; 00:00:03     ; 1.0                     ; 4832 MB             ; 00:00:02                           ;
-; Total                ; 00:08:34     ; --                      ; --                  ; 00:36:43                           ;
+; Total                ; 00:08:23     ; --                      ; --                  ; 00:32:23                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

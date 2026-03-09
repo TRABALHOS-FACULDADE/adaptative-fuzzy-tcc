@@ -22,13 +22,16 @@ vmap work work
 #     4. testbench_cenario_alerta (depende de fuzzy_top e tb_fuzzy_pkg)
 # -----------------------------------------------------------------------------
 vcom -2008 -work work triangular_mf.vhd
-vcom -2008 -work work fuzzifier.vhd
-vcom -2008 -work work rule_evaluator.vhd
-vcom -2008 -work work aggregator.vhd
-vcom -2008 -work work defuzzifier.vhd
-vcom -2008 -work work uart_receiver.vhd
+vcom -2008 -work work ms_fuzzify.vhd
+vcom -2008 -work work ms_rule_eval.vhd
+vcom -2008 -work work ms_aggregate.vhd
+vcom -2008 -work work ms_defuzzify.vhd
+vcom -2008 -work work ms_config_uart.vhd
+vcom -2008 -work work ms_config_can.vhd
+vcom -2008 -work work ms_config_spi.vhd
+vcom -2008 -work work ms_config_arbiter.vhd
 vcom -2008 -work work config_registers.vhd
-vcom -2008 -work work adaptation_engine.vhd
+vcom -2008 -work work ms_adapt.vhd
 vcom -2008 -work work fuzzy_top.vhd
 vcom -2008 -work work tb_fuzzy_pkg.vhd
 vcom -2008 -work work testbench_cenario_alerta.vhd

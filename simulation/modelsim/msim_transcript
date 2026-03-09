@@ -13,25 +13,25 @@
 # Modifying modelsim.ini
 # vcom -93 -work altera {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_syn_attributes.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:41 on Mar 01,2026
+# Start time: 21:43:45 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work altera c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_syn_attributes.vhd 
 # -- Loading package STANDARD
 # -- Compiling package altera_syn_attributes
-# End time: 11:46:41 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:45 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work altera {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_standard_functions.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:41 on Mar 01,2026
+# Start time: 21:43:46 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work altera c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_standard_functions.vhd 
 # -- Loading package STANDARD
 # -- Compiling package altera_standard_functions
 # -- Compiling package body altera_standard_functions
 # -- Loading package altera_standard_functions
-# End time: 11:46:41 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:46 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work altera {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/alt_dspbuilder_package.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:41 on Mar 01,2026
+# Start time: 21:43:46 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work altera c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/alt_dspbuilder_package.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -40,11 +40,11 @@
 # -- Compiling package alt_dspbuilder_package
 # -- Compiling package body alt_dspbuilder_package
 # -- Loading package alt_dspbuilder_package
-# End time: 11:46:41 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:46 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work altera {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_europa_support_lib.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:41 on Mar 01,2026
+# Start time: 21:43:46 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work altera c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_europa_support_lib.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -55,11 +55,11 @@
 # -- Compiling package altera_europa_support_lib
 # -- Compiling package body altera_europa_support_lib
 # -- Loading package altera_europa_support_lib
-# End time: 11:46:41 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:46 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work altera {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_primitives_components.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:41 on Mar 01,2026
+# Start time: 21:43:46 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work altera c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_primitives_components.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -69,11 +69,11 @@
 # -- Compiling package dffeas_pack
 # -- Loading package dffeas_pack
 # -- Compiling package altera_primitives_components
-# End time: 11:46:42 on Mar 01,2026, Elapsed time: 0:00:01
+# End time: 21:43:47 on Mar 07,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vcom -93 -work altera {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_primitives.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:42 on Mar 01,2026
+# Start time: 21:43:47 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work altera c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_primitives.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -161,7 +161,7 @@
 # -- Compiling architecture BEHAVIOR of alt_bidir_diff
 # -- Compiling entity alt_bidir_buf
 # -- Compiling architecture BEHAVIOR of alt_bidir_buf
-# End time: 11:46:42 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:47 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vlib vhdl_libs/lpm
@@ -172,17 +172,17 @@
 # Modifying modelsim.ini
 # vcom -93 -work lpm {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/220pack.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:42 on Mar 01,2026
+# Start time: 21:43:47 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work lpm c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/220pack.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling package LPM_COMPONENTS
-# End time: 11:46:42 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:47 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work lpm {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/220model.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:42 on Mar 01,2026
+# Start time: 21:43:48 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work lpm c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/220model.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -278,7 +278,7 @@
 # -- Compiling architecture LPM_SYN of LPM_OUTpad
 # -- Compiling entity LPM_BIpad
 # -- Compiling architecture LPM_SYN of LPM_BIpad
-# End time: 11:46:43 on Mar 01,2026, Elapsed time: 0:00:01
+# End time: 21:43:48 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vlib vhdl_libs/sgate
@@ -289,7 +289,7 @@
 # Modifying modelsim.ini
 # vcom -93 -work sgate {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/sgate_pack.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:43 on Mar 01,2026
+# Start time: 21:43:48 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work sgate c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/sgate_pack.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -297,11 +297,11 @@
 # -- Compiling package sgate_pack
 # -- Compiling package body sgate_pack
 # -- Loading package sgate_pack
-# End time: 11:46:43 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:48 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work sgate {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/sgate.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:43 on Mar 01,2026
+# Start time: 21:43:48 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work sgate c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/sgate.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -351,7 +351,7 @@
 # -- Compiling architecture sim_arch of oper_bus_mux
 # -- Compiling entity oper_latch
 # -- Compiling architecture sim_arch of oper_latch
-# End time: 11:46:43 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:49 on Mar 07,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # 
 # vlib vhdl_libs/altera_mf
@@ -362,17 +362,17 @@
 # Modifying modelsim.ini
 # vcom -93 -work altera_mf {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_mf_components.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:43 on Mar 01,2026
+# Start time: 21:43:49 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work altera_mf c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_mf_components.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling package altera_mf_components
-# End time: 11:46:44 on Mar 01,2026, Elapsed time: 0:00:01
+# End time: 21:43:49 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work altera_mf {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_mf.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:44 on Mar 01,2026
+# Start time: 21:43:49 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work altera_mf c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_mf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -611,7 +611,7 @@
 # -- Compiling architecture sim_sld_virtual_jtag_basic of sld_virtual_jtag_basic
 # -- Compiling entity altsource_probe
 # -- Compiling architecture sim_altsource_probe of altsource_probe
-# End time: 11:46:45 on Mar 01,2026, Elapsed time: 0:00:01
+# End time: 21:43:51 on Mar 07,2026, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 0
 # 
 # vlib vhdl_libs/altera_lnsim
@@ -622,21 +622,21 @@
 # Modifying modelsim.ini
 # vlog -sv -work altera_lnsim {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/mentor/altera_lnsim_for_vhdl.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:45 on Mar 01,2026
+# Start time: 21:43:51 on Mar 07,2026
 # vlog -reportprogress 300 -sv -work altera_lnsim c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/mentor/altera_lnsim_for_vhdl.sv 
 # 
 # Top level modules:
-# End time: 11:46:46 on Mar 01,2026, Elapsed time: 0:00:01
+# End time: 21:43:52 on Mar 07,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vcom -93 -work altera_lnsim {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_lnsim_components.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:46 on Mar 01,2026
+# Start time: 21:43:52 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work altera_lnsim c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/altera_lnsim_components.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling package altera_lnsim_components
-# End time: 11:46:46 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:53 on Mar 07,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # 
 # vlib vhdl_libs/cyclonev
@@ -647,7 +647,7 @@
 # Modifying modelsim.ini
 # vlog -vlog01compat -work cyclonev {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/mentor/cyclonev_atoms_ncrypt.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:47 on Mar 01,2026
+# Start time: 21:43:53 on Mar 07,2026
 # vlog -reportprogress 300 -vlog01compat -work cyclonev c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/mentor/cyclonev_atoms_ncrypt.v 
 # ** Warning: (vlog-2083) <protected>(<protected>): Carriage return (0x0D) is not followed by a newline (0x0A).
 # ** Warning: (vlog-2083) <protected>(<protected>): Carriage return (0x0D) is not followed by a newline (0x0A).
@@ -661,11 +661,11 @@
 # ** Warning: (vlog-2083) <protected>(<protected>): Carriage return (0x0D) is not followed by a newline (0x0A).
 # 
 # Top level modules:
-# End time: 11:46:49 on Mar 01,2026, Elapsed time: 0:00:02
+# End time: 21:43:55 on Mar 07,2026, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 10
 # vcom -93 -work cyclonev {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/cyclonev_atoms.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:49 on Mar 01,2026
+# Start time: 21:43:56 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work cyclonev c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/cyclonev_atoms.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -805,11 +805,11 @@
 # -- Compiling architecture behavior of cyclonev_ir_fifo_userdes
 # -- Compiling entity cyclonev_oscillator
 # -- Compiling architecture behavior of cyclonev_oscillator
-# End time: 11:46:50 on Mar 01,2026, Elapsed time: 0:00:01
+# End time: 21:43:56 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 1
 # vcom -93 -work cyclonev {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/cyclonev_components.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:50 on Mar 01,2026
+# Start time: 21:43:56 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work cyclonev c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/cyclonev_components.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -818,7 +818,7 @@
 # -- Loading package VITAL_Primitives
 # -- Loading package cyclonev_atom_pack
 # -- Compiling package cyclonev_components
-# End time: 11:46:50 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:56 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vlib vhdl_libs/cyclonev_hssi
@@ -829,7 +829,7 @@
 # Modifying modelsim.ini
 # vcom -93 -work cyclonev_hssi {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/cyclonev_hssi_components.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:50 on Mar 01,2026
+# Start time: 21:43:56 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work cyclonev_hssi c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/cyclonev_hssi_components.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -837,19 +837,19 @@
 # -- Compiling package CYCLONEV_HSSI_COMPONENTS
 # -- Compiling package body CYCLONEV_HSSI_COMPONENTS
 # -- Loading package CYCLONEV_HSSI_COMPONENTS
-# End time: 11:46:50 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:57 on Mar 07,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vlog -vlog01compat -work cyclonev_hssi {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/mentor/cyclonev_hssi_atoms_ncrypt.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:50 on Mar 01,2026
+# Start time: 21:43:57 on Mar 07,2026
 # vlog -reportprogress 300 -vlog01compat -work cyclonev_hssi c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/mentor/cyclonev_hssi_atoms_ncrypt.v 
 # 
 # Top level modules:
-# End time: 11:46:52 on Mar 01,2026, Elapsed time: 0:00:02
+# End time: 21:43:59 on Mar 07,2026, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 0
 # vcom -93 -work cyclonev_hssi {c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/cyclonev_hssi_atoms.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:52 on Mar 01,2026
+# Start time: 21:43:59 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work cyclonev_hssi c:/intelfpga_lite/22.1std/quartus/eda/sim_lib/cyclonev_hssi_atoms.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -903,7 +903,7 @@
 # -- Compiling architecture behavior of cyclonev_hssi_pma_hi_pmaif
 # -- Compiling entity cyclonev_hssi_pma_hi_xcvrif
 # -- Compiling architecture behavior of cyclonev_hssi_pma_hi_xcvrif
-# End time: 11:46:52 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:43:59 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # if {[file exists rtl_work]} {
@@ -915,81 +915,81 @@
 # vmap work rtl_work 
 # Modifying modelsim.ini
 # 
-# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/uart_receiver.vhd}
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/system_top.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:53 on Mar 01,2026
-# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/uart_receiver.vhd 
+# Start time: 21:44:00 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/system_top.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity uart_receiver
-# -- Compiling architecture rtl of uart_receiver
-# End time: 11:46:53 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity system_top
+# -- Compiling architecture rtl of system_top
+# End time: 21:44:00 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/triangular_mf.vhd}
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_client.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:53 on Mar 01,2026
-# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/triangular_mf.vhd 
+# Start time: 21:44:00 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_client.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity triangular_mf
-# -- Compiling architecture rtl of triangular_mf
-# End time: 11:46:53 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity ms_client
+# -- Compiling architecture rtl of ms_client
+# End time: 21:44:00 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/rule_evaluator.vhd}
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_uart.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:53 on Mar 01,2026
-# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/rule_evaluator.vhd 
+# Start time: 21:44:00 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_uart.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity rule_evaluator
-# -- Compiling architecture rtl of rule_evaluator
-# End time: 11:46:53 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity ms_config_uart
+# -- Compiling architecture rtl of ms_config_uart
+# End time: 21:44:00 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd}
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_spi.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:53 on Mar 01,2026
-# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd 
+# Start time: 21:44:00 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_spi.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity fuzzy_top
-# -- Compiling architecture rtl of fuzzy_top
-# End time: 11:46:53 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity ms_config_spi
+# -- Compiling architecture rtl of ms_config_spi
+# End time: 21:44:00 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzifier.vhd}
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_can.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:53 on Mar 01,2026
-# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzifier.vhd 
+# Start time: 21:44:00 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_can.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity fuzzifier
-# -- Compiling architecture rtl of fuzzifier
-# End time: 11:46:55 on Mar 01,2026, Elapsed time: 0:00:02
+# -- Compiling entity ms_config_can
+# -- Compiling architecture rtl of ms_config_can
+# End time: 21:44:00 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/defuzzifier.vhd}
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_arbiter.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:55 on Mar 01,2026
-# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/defuzzifier.vhd 
+# Start time: 21:44:00 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_arbiter.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity defuzzifier
-# -- Compiling architecture rtl of defuzzifier
-# End time: 11:46:55 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity ms_config_arbiter
+# -- Compiling architecture rtl of ms_config_arbiter
+# End time: 21:44:00 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/config_registers.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:55 on Mar 01,2026
+# Start time: 21:44:00 on Mar 07,2026
 # vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/config_registers.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -997,31 +997,91 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity config_registers
 # -- Compiling architecture rtl of config_registers
-# End time: 11:46:55 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:44:00 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/aggregator.vhd}
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_rule_eval.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:55 on Mar 01,2026
-# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/aggregator.vhd 
+# Start time: 21:44:01 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_rule_eval.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity aggregator
-# -- Compiling architecture rtl of aggregator
-# End time: 11:46:55 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity ms_rule_eval
+# -- Compiling architecture rtl of ms_rule_eval
+# End time: 21:44:01 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/adaptation_engine.vhd}
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_fuzzify.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:46:56 on Mar 01,2026
-# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/adaptation_engine.vhd 
+# Start time: 21:44:01 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_fuzzify.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity adaptation_engine
-# -- Compiling architecture rtl of adaptation_engine
-# End time: 11:46:56 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity ms_fuzzify
+# -- Compiling architecture rtl of ms_fuzzify
+# End time: 21:44:01 on Mar 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_defuzzify.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:44:01 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_defuzzify.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity ms_defuzzify
+# -- Compiling architecture rtl of ms_defuzzify
+# End time: 21:44:01 on Mar 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_aggregate.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:44:01 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_aggregate.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity ms_aggregate
+# -- Compiling architecture rtl of ms_aggregate
+# End time: 21:44:01 on Mar 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_adapt.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:44:01 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_adapt.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity ms_adapt
+# -- Compiling architecture rtl of ms_adapt
+# End time: 21:44:01 on Mar 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/triangular_mf.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:44:01 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/triangular_mf.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity triangular_mf
+# -- Compiling architecture rtl of triangular_mf
+# End time: 21:44:01 on Mar 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:44:01 on Mar 07,2026
+# vcom -reportprogress 300 -93 -work work C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity fuzzy_top
+# -- Compiling architecture rtl of fuzzy_top
+# End time: 21:44:02 on Mar 07,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # 
 ls
@@ -1031,19 +1091,22 @@ ls
 # adaptative_fuzzy_run_msim_rtl_vhdl.do       
 # adaptative_fuzzy_run_msim_rtl_vhdl.do.bak   
 # adaptative_fuzzy_run_msim_rtl_vhdl.do.bak1  
+# adaptative_fuzzy_run_msim_rtl_vhdl.do.bak2  
 # modelsim.ini                                
 # msim_transcript                             
 # rtl_work                                    
 # vhdl_libs                                   
-cd C:/Dev/TCC/AdaptativeFuzzyForGenericResources
+cd C:/Dev/TCC
+# reading C:/intelFPGA/20.1/modelsim_ase/win32aloem/../modelsim.ini
+cd AdaptativeFuzzyForGenericResources
 # reading modelsim.ini
-do sim_alerta.do
+do sim_idle.do
 # ** Warning: (vlib-34) Library already exists at "work".
 # Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
 # vmap work work 
 # Modifying modelsim.ini
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:32 on Mar 01,2026
+# Start time: 21:44:50 on Mar 07,2026
 # vcom -reportprogress 300 -2008 -work work triangular_mf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -1051,65 +1114,126 @@ do sim_alerta.do
 # -- Loading package NUMERIC_STD
 # -- Compiling entity triangular_mf
 # -- Compiling architecture rtl of triangular_mf
-# End time: 11:47:32 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:44:50 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:32 on Mar 01,2026
+# Start time: 21:44:50 on Mar 07,2026
 # vcom -reportprogress 300 -2008 -work work fuzzifier.vhd 
+# ** Error: (vcom-7) Failed to open design unit file "fuzzifier.vhd" in read mode.
+# No such file or directory. (errno = ENOENT)
+# End time: 21:44:50 on Mar 07,2026, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# ** Error: C:/intelFPGA/20.1/modelsim_ase/win32aloem/vcom failed.
+# Error in macro ./sim_idle.do line 19
+# C:/intelFPGA/20.1/modelsim_ase/win32aloem/vcom failed.
+#     while executing
+# "vcom -2008 -work work fuzzifier.vhd"
+do sim_idle.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:51:43 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work triangular_mf.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity fuzzifier
-# -- Compiling architecture rtl of fuzzifier
-# End time: 11:47:32 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity triangular_mf
+# -- Compiling architecture rtl of triangular_mf
+# End time: 21:51:43 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:32 on Mar 01,2026
-# vcom -reportprogress 300 -2008 -work work rule_evaluator.vhd 
+# Start time: 21:51:43 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work ms_fuzzify.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity rule_evaluator
-# -- Compiling architecture rtl of rule_evaluator
-# End time: 11:47:33 on Mar 01,2026, Elapsed time: 0:00:01
+# -- Compiling entity ms_fuzzify
+# -- Compiling architecture rtl of ms_fuzzify
+# End time: 21:51:43 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:33 on Mar 01,2026
-# vcom -reportprogress 300 -2008 -work work aggregator.vhd 
+# Start time: 21:51:43 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work ms_rule_eval.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity aggregator
-# -- Compiling architecture rtl of aggregator
-# End time: 11:47:33 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity ms_rule_eval
+# -- Compiling architecture rtl of ms_rule_eval
+# End time: 21:51:43 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:33 on Mar 01,2026
-# vcom -reportprogress 300 -2008 -work work defuzzifier.vhd 
+# Start time: 21:51:43 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work ms_aggregate.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity defuzzifier
-# -- Compiling architecture rtl of defuzzifier
-# End time: 11:47:33 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity ms_aggregate
+# -- Compiling architecture rtl of ms_aggregate
+# End time: 21:51:43 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:33 on Mar 01,2026
-# vcom -reportprogress 300 -2008 -work work uart_receiver.vhd 
+# Start time: 21:51:43 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work ms_defuzzify.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity uart_receiver
-# -- Compiling architecture rtl of uart_receiver
-# End time: 11:47:33 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity ms_defuzzify
+# -- Compiling architecture rtl of ms_defuzzify
+# End time: 21:51:43 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:33 on Mar 01,2026
+# Start time: 21:51:43 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work ms_config_uart.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity ms_config_uart
+# -- Compiling architecture rtl of ms_config_uart
+# End time: 21:51:43 on Mar 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:51:43 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work ms_config_can.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity ms_config_can
+# -- Compiling architecture rtl of ms_config_can
+# End time: 21:51:43 on Mar 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:51:43 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work ms_config_spi.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity ms_config_spi
+# -- Compiling architecture rtl of ms_config_spi
+# End time: 21:51:43 on Mar 07,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:51:43 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work ms_config_arbiter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity ms_config_arbiter
+# -- Compiling architecture rtl of ms_config_arbiter
+# End time: 21:51:44 on Mar 07,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 21:51:44 on Mar 07,2026
 # vcom -reportprogress 300 -2008 -work work config_registers.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -1117,21 +1241,21 @@ do sim_alerta.do
 # -- Loading package NUMERIC_STD
 # -- Compiling entity config_registers
 # -- Compiling architecture rtl of config_registers
-# End time: 11:47:33 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:51:44 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:33 on Mar 01,2026
-# vcom -reportprogress 300 -2008 -work work adaptation_engine.vhd 
+# Start time: 21:51:44 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work ms_adapt.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity adaptation_engine
-# -- Compiling architecture rtl of adaptation_engine
-# End time: 11:47:33 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity ms_adapt
+# -- Compiling architecture rtl of ms_adapt
+# End time: 21:51:44 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:33 on Mar 01,2026
+# Start time: 21:51:44 on Mar 07,2026
 # vcom -reportprogress 300 -2008 -work work fuzzy_top.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -1139,10 +1263,10 @@ do sim_alerta.do
 # -- Loading package NUMERIC_STD
 # -- Compiling entity fuzzy_top
 # -- Compiling architecture rtl of fuzzy_top
-# End time: 11:47:33 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:51:44 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:33 on Mar 01,2026
+# Start time: 21:51:44 on Mar 07,2026
 # vcom -reportprogress 300 -2008 -work work tb_fuzzy_pkg.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -1151,86 +1275,89 @@ do sim_alerta.do
 # -- Compiling package tb_fuzzy_pkg
 # -- Compiling package body tb_fuzzy_pkg
 # -- Loading package tb_fuzzy_pkg
-# End time: 11:47:33 on Mar 01,2026, Elapsed time: 0:00:00
+# End time: 21:51:44 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 11:47:33 on Mar 01,2026
-# vcom -reportprogress 300 -2008 -work work testbench_cenario_alerta.vhd 
+# Start time: 21:51:44 on Mar 07,2026
+# vcom -reportprogress 300 -2008 -work work testbench_servidor_idle.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
 # -- Loading package tb_fuzzy_pkg
-# -- Compiling entity testbench_cenario_alerta
-# -- Compiling architecture sim of testbench_cenario_alerta
-# End time: 11:47:33 on Mar 01,2026, Elapsed time: 0:00:00
+# -- Compiling entity testbench_servidor_idle
+# -- Compiling architecture sim of testbench_servidor_idle
+# End time: 21:51:44 on Mar 07,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vsim -t 1ns work.testbench_cenario_alerta 
-# Start time: 11:47:33 on Mar 01,2026
+# vsim -t 1ns work.testbench_servidor_idle 
+# Start time: 21:51:44 on Mar 07,2026
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.numeric_std(body)
 # Loading work.tb_fuzzy_pkg(body)
-# Loading work.testbench_cenario_alerta(sim)
+# Loading work.testbench_servidor_idle(sim)
 # Loading work.fuzzy_top(rtl)
-# Loading work.uart_receiver(rtl)
+# Loading work.ms_config_uart(rtl)
+# Loading work.ms_config_can(rtl)
+# Loading work.ms_config_spi(rtl)
+# Loading work.ms_config_arbiter(rtl)
 # Loading work.config_registers(rtl)
-# Loading work.fuzzifier(rtl)
+# Loading work.ms_fuzzify(rtl)
 # Loading work.triangular_mf(rtl)
-# Loading work.rule_evaluator(rtl)
-# Loading work.aggregator(rtl)
-# Loading work.defuzzifier(rtl)
-# Loading work.adaptation_engine(rtl)
+# Loading work.ms_rule_eval(rtl)
+# Loading work.ms_aggregate(rtl)
+# Loading work.ms_defuzzify(rtl)
+# Loading work.ms_adapt(rtl)
 # ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 0  Instance: /testbench_cenario_alerta/DUT/u_rules
+#    Time: 0 ns  Iteration: 0  Instance: /testbench_servidor_idle/DUT/u_rules
 # ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 0  Instance: /testbench_cenario_alerta/DUT/u_rules
+#    Time: 0 ns  Iteration: 0  Instance: /testbench_servidor_idle/DUT/u_rules
 # ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 0  Instance: /testbench_cenario_alerta/DUT/u_rules
+#    Time: 0 ns  Iteration: 0  Instance: /testbench_servidor_idle/DUT/u_rules
 # ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 0  Instance: /testbench_cenario_alerta/DUT/u_rules
+#    Time: 0 ns  Iteration: 0  Instance: /testbench_servidor_idle/DUT/u_rules
 # ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 0  Instance: /testbench_cenario_alerta/DUT/u_rules
+#    Time: 0 ns  Iteration: 0  Instance: /testbench_servidor_idle/DUT/u_rules
 # ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 0  Instance: /testbench_cenario_alerta/DUT/u_rules
+#    Time: 0 ns  Iteration: 0  Instance: /testbench_servidor_idle/DUT/u_rules
 # ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 0  Instance: /testbench_cenario_alerta/DUT/u_rules
+#    Time: 0 ns  Iteration: 0  Instance: /testbench_servidor_idle/DUT/u_rules
 # ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 0  Instance: /testbench_cenario_alerta/DUT/u_rules
+#    Time: 0 ns  Iteration: 0  Instance: /testbench_servidor_idle/DUT/u_rules
 # ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 0  Instance: /testbench_cenario_alerta/DUT/u_rules
+#    Time: 0 ns  Iteration: 0  Instance: /testbench_servidor_idle/DUT/u_rules
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 1  Instance: /testbench_cenario_alerta/DUT/u_agg
+#    Time: 0 ns  Iteration: 1  Instance: /testbench_servidor_idle/DUT/u_agg
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 1  Instance: /testbench_cenario_alerta/DUT/u_agg
+#    Time: 0 ns  Iteration: 1  Instance: /testbench_servidor_idle/DUT/u_agg
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 1  Instance: /testbench_cenario_alerta/DUT/u_agg
+#    Time: 0 ns  Iteration: 1  Instance: /testbench_servidor_idle/DUT/u_agg
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 1  Instance: /testbench_cenario_alerta/DUT/u_agg
+#    Time: 0 ns  Iteration: 1  Instance: /testbench_servidor_idle/DUT/u_agg
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 1  Instance: /testbench_cenario_alerta/DUT/u_agg
+#    Time: 0 ns  Iteration: 1  Instance: /testbench_servidor_idle/DUT/u_agg
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 1  Instance: /testbench_cenario_alerta/DUT/u_agg
+#    Time: 0 ns  Iteration: 1  Instance: /testbench_servidor_idle/DUT/u_agg
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 1  Instance: /testbench_cenario_alerta/DUT/u_agg
+#    Time: 0 ns  Iteration: 1  Instance: /testbench_servidor_idle/DUT/u_agg
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 1  Instance: /testbench_cenario_alerta/DUT/u_agg
+#    Time: 0 ns  Iteration: 1  Instance: /testbench_servidor_idle/DUT/u_agg
 # ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
-#    Time: 0 ns  Iteration: 1  Instance: /testbench_cenario_alerta/DUT/u_agg
-# ** Note: === Cenario 2: Servidor em Alerta ===
-#    Time: 203710 ns  Iteration: 0  Instance: /testbench_cenario_alerta
-# ** Note:   sensor1 (CPU) = 160 (~63%)
-#    Time: 203710 ns  Iteration: 0  Instance: /testbench_cenario_alerta
-# ** Note:   sensor2 (MEM) = 160 (~63%)
-#    Time: 203710 ns  Iteration: 0  Instance: /testbench_cenario_alerta
-# ** Note:   result_class  = 1  (esperado 1 = ALERT)
-#    Time: 203710 ns  Iteration: 0  Instance: /testbench_cenario_alerta
-# ** Note:   result_value  = 171  (esperado 171)
-#    Time: 203710 ns  Iteration: 0  Instance: /testbench_cenario_alerta
+#    Time: 0 ns  Iteration: 1  Instance: /testbench_servidor_idle/DUT/u_agg
+# ** Note: === Cenario 1: Servidor em Idle ===
+#    Time: 203710 ns  Iteration: 0  Instance: /testbench_servidor_idle
+# ** Note:   sensor1 (CPU) = 13 (~5%)
+#    Time: 203710 ns  Iteration: 0  Instance: /testbench_servidor_idle
+# ** Note:   sensor2 (MEM) = 26 (~10%)
+#    Time: 203710 ns  Iteration: 0  Instance: /testbench_servidor_idle
+# ** Note:   result_class  = 0  (esperado 0 = OK)
+#    Time: 203710 ns  Iteration: 0  Instance: /testbench_servidor_idle
+# ** Note:   result_value  = 85  (esperado 85)
+#    Time: 203710 ns  Iteration: 0  Instance: /testbench_servidor_idle
 # ** Note: === Simulacao concluida ===
-#    Time: 203710 ns  Iteration: 0  Instance: /testbench_cenario_alerta
+#    Time: 203710 ns  Iteration: 0  Instance: /testbench_servidor_idle
 # Break key hit
-# Break in Process line__60 at triangular_mf.vhd line 60
-# End time: 22:06:43 on Mar 01,2026, Elapsed time: 10:19:10
+# Break in Process line__79 at ms_defuzzify.vhd line 97
+# End time: 23:58:54 on Mar 07,2026, Elapsed time: 2:07:10
 # Errors: 0, Warnings: 18
