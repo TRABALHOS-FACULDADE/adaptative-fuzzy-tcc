@@ -1,5 +1,6 @@
 -- =============================================================================
 -- config_registers.vhd
+-- [SOA] SERVICE REGISTRY — Central repository for all 33 configurable parameters
 -- Banco de Registradores de Configuracao
 --
 -- Origem Python: configure_input1(), configure_input2(), configure_rules()

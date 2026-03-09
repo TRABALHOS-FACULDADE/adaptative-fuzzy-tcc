@@ -1,5 +1,6 @@
 -- =============================================================================
 -- fuzzy_top.vhd
+-- [SOA] SERVICE BROKER — Orchestrates all microservices via FSM pipeline
 -- Entidade Top-Level do Sistema Fuzzy Adaptativo
 --
 -- Origem Python: fluxo geral do metodo infer() + adapt()
@@ -7,15 +8,18 @@
 -- Instancia e conecta todos os componentes, coordena o pipeline via FSM
 --
 -- Hierarquia:
---   fuzzy_top
---     +-- uart_receiver          (comunicacao serial)
---     +-- config_registers       (banco de 33 registradores, dual write)
---     +-- fuzzifier (x2)         (input1, input2 em paralelo)
+--   fuzzy_top (Service Broker)
+--     +-- ms_config_uart         (configuracao externa via UART)
+--     +-- ms_config_can          (configuracao externa via CAN 2.0A)
+--     +-- ms_config_spi          (configuracao externa via SPI Mode 0)
+--     +-- ms_config_arbiter      (arbitra escritas ao Service Registry)
+--     +-- config_registers       (Service Registry: 33 registradores, dual write)
+--     +-- ms_fuzzify (x2)        (input1, input2 em paralelo)
 --     |     +-- triangular_mf (x3 cada)
---     +-- rule_evaluator         (9 regras, combinacional)
---     +-- aggregator             (MAX por classe, combinacional)
---     +-- defuzzifier            (media ponderada + classificacao)
---     +-- adaptation_engine      (ms_adapt: Welford + EMA + derivacao)
+--     +-- ms_rule_eval           (9 regras, combinacional)
+--     +-- ms_aggregate           (MAX por classe, combinacional)
+--     +-- ms_defuzzify           (media ponderada + classificacao)
+--     +-- ms_adapt               (Welford + EMA + derivacao)
 --
 -- FSM Principal:
 --   IDLE -> FUZZ_START -> FUZZ_WAIT -> DEFUZZ_START -> DEFUZZ_WAIT ->
@@ -38,14 +42,19 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity fuzzy_top is
     generic (
-        CLKS_PER_BIT : integer := 434     -- 50 MHz / 115200 baud
+        CLKS_PER_BIT     : integer := 434;   -- UART: 50 MHz / 115200 baud
+        CAN_CLKS_PER_BIT : integer := 500    -- CAN:  50 MHz / 100 kbps
     );
     port (
         clk          : in  std_logic;
         rst          : in  std_logic;
 
-        -- UART para configuracao
+        -- Interfaces de configuracao externa
         uart_rx      : in  std_logic;
+        can_rx       : in  std_logic;   -- CAN bus RX (dominant='0')
+        spi_cs_n     : in  std_logic;   -- SPI chip select (ativo baixo)
+        spi_sclk     : in  std_logic;   -- SPI clock
+        spi_mosi     : in  std_logic;   -- SPI dados do mestre
 
         -- Dados dos sensores (Q8.8 ponto fixo)
         sensor1_data : in  std_logic_vector(15 downto 0);
@@ -86,11 +95,32 @@ architecture rtl of fuzzy_top is
     signal state : main_state_t;
 
     -- =========================================================================
-    -- Sinais: UART -> Config Registers
+    -- Sinais: ms_config_uart -> ms_config_arbiter
     -- =========================================================================
     signal uart_wr_en   : std_logic;
     signal uart_wr_addr : std_logic_vector(7 downto 0);
     signal uart_wr_data : std_logic_vector(15 downto 0);
+
+    -- =========================================================================
+    -- Sinais: ms_config_can -> ms_config_arbiter
+    -- =========================================================================
+    signal can_wr_en    : std_logic;
+    signal can_wr_addr  : std_logic_vector(7 downto 0);
+    signal can_wr_data  : std_logic_vector(15 downto 0);
+
+    -- =========================================================================
+    -- Sinais: ms_config_spi -> ms_config_arbiter
+    -- =========================================================================
+    signal spi_wr_en    : std_logic;
+    signal spi_wr_addr  : std_logic_vector(7 downto 0);
+    signal spi_wr_data  : std_logic_vector(15 downto 0);
+
+    -- =========================================================================
+    -- Sinais: ms_config_arbiter -> config_registers (Service Registry, porta 1)
+    -- =========================================================================
+    signal cfg_wr_en    : std_logic;
+    signal cfg_wr_addr  : std_logic_vector(7 downto 0);
+    signal cfg_wr_data  : std_logic_vector(15 downto 0);
 
     -- =========================================================================
     -- Sinais: ms_adapt -> Config Registers
@@ -173,12 +203,56 @@ architecture rtl of fuzzy_top is
     -- Declaracao dos componentes
     -- =========================================================================
 
-    component uart_receiver is
+    component ms_config_uart is
         generic (CLKS_PER_BIT : integer);
         port (
             clk        : in  std_logic;
             rst        : in  std_logic;
             uart_rx    : in  std_logic;
+            write_en   : out std_logic;
+            write_addr : out std_logic_vector(7 downto 0);
+            write_data : out std_logic_vector(15 downto 0)
+        );
+    end component;
+
+    component ms_config_can is
+        generic (CLKS_PER_BIT : integer);
+        port (
+            clk        : in  std_logic;
+            rst        : in  std_logic;
+            can_rx     : in  std_logic;
+            write_en   : out std_logic;
+            write_addr : out std_logic_vector(7 downto 0);
+            write_data : out std_logic_vector(15 downto 0)
+        );
+    end component;
+
+    component ms_config_spi is
+        port (
+            clk        : in  std_logic;
+            rst        : in  std_logic;
+            spi_cs_n   : in  std_logic;
+            spi_sclk   : in  std_logic;
+            spi_mosi   : in  std_logic;
+            write_en   : out std_logic;
+            write_addr : out std_logic_vector(7 downto 0);
+            write_data : out std_logic_vector(15 downto 0)
+        );
+    end component;
+
+    component ms_config_arbiter is
+        port (
+            clk        : in  std_logic;
+            rst        : in  std_logic;
+            uart_req   : in  std_logic;
+            uart_addr  : in  std_logic_vector(7 downto 0);
+            uart_data  : in  std_logic_vector(15 downto 0);
+            can_req    : in  std_logic;
+            can_addr   : in  std_logic_vector(7 downto 0);
+            can_data   : in  std_logic_vector(15 downto 0);
+            spi_req    : in  std_logic;
+            spi_addr   : in  std_logic_vector(7 downto 0);
+            spi_data   : in  std_logic_vector(15 downto 0);
             write_en   : out std_logic;
             write_addr : out std_logic_vector(7 downto 0);
             write_data : out std_logic_vector(15 downto 0)
@@ -213,7 +287,7 @@ architecture rtl of fuzzy_top is
         );
     end component;
 
-    component fuzzifier is
+    component ms_fuzzify is
         port (
             clk, rst, start : in  std_logic;
             crisp_val       : in  signed(15 downto 0);
@@ -225,7 +299,7 @@ architecture rtl of fuzzy_top is
         );
     end component;
 
-    component rule_evaluator is
+    component ms_rule_eval is
         port (
             mu1_low, mu1_med, mu1_high : in  signed(15 downto 0);
             mu2_low, mu2_med, mu2_high : in  signed(15 downto 0);
@@ -235,7 +309,7 @@ architecture rtl of fuzzy_top is
         );
     end component;
 
-    component aggregator is
+    component ms_aggregate is
         port (
             strength_0, strength_1, strength_2 : in signed(15 downto 0);
             strength_3, strength_4, strength_5 : in signed(15 downto 0);
@@ -247,7 +321,7 @@ architecture rtl of fuzzy_top is
         );
     end component;
 
-    component defuzzifier is
+    component ms_defuzzify is
         port (
             clk, rst, start    : in  std_logic;
             weight_ok, weight_alert, weight_crit : in signed(15 downto 0);
@@ -258,7 +332,7 @@ architecture rtl of fuzzy_top is
         );
     end component;
 
-    component adaptation_engine is
+    component ms_adapt is
         port (
             clk, rst       : in  std_logic;
             start          : in  std_logic;
@@ -285,9 +359,9 @@ architecture rtl of fuzzy_top is
 begin
 
     -- =========================================================================
-    -- UART Receiver: recebe configuracao via serial
+    -- ms_config_uart: configuracao via UART serial
     -- =========================================================================
-    u_uart : uart_receiver
+    u_uart : ms_config_uart
         generic map (CLKS_PER_BIT => CLKS_PER_BIT)
         port map (
             clk        => clk,
@@ -299,17 +373,67 @@ begin
         );
 
     -- =========================================================================
+    -- ms_config_can: configuracao via CAN 2.0A
+    -- =========================================================================
+    u_can : ms_config_can
+        generic map (CLKS_PER_BIT => CAN_CLKS_PER_BIT)
+        port map (
+            clk        => clk,
+            rst        => rst,
+            can_rx     => can_rx,
+            write_en   => can_wr_en,
+            write_addr => can_wr_addr,
+            write_data => can_wr_data
+        );
+
+    -- =========================================================================
+    -- ms_config_spi: configuracao via SPI Mode 0
+    -- =========================================================================
+    u_spi : ms_config_spi
+        port map (
+            clk        => clk,
+            rst        => rst,
+            spi_cs_n   => spi_cs_n,
+            spi_sclk   => spi_sclk,
+            spi_mosi   => spi_mosi,
+            write_en   => spi_wr_en,
+            write_addr => spi_wr_addr,
+            write_data => spi_wr_data
+        );
+
+    -- =========================================================================
+    -- ms_config_arbiter: serializa escritas UART/CAN/SPI ao Service Registry
+    -- =========================================================================
+    u_cfg_arb : ms_config_arbiter
+        port map (
+            clk        => clk,
+            rst        => rst,
+            uart_req   => uart_wr_en,
+            uart_addr  => uart_wr_addr,
+            uart_data  => uart_wr_data,
+            can_req    => can_wr_en,
+            can_addr   => can_wr_addr,
+            can_data   => can_wr_data,
+            spi_req    => spi_wr_en,
+            spi_addr   => spi_wr_addr,
+            spi_data   => spi_wr_data,
+            write_en   => cfg_wr_en,
+            write_addr => cfg_wr_addr,
+            write_data => cfg_wr_data
+        );
+
+    -- =========================================================================
     -- Banco de Registradores: armazena todos os 33 parametros do sistema
-    -- Duas portas de escrita: UART (externa) e ms_adapt (interna)
+    -- Duas portas de escrita: arbiter (externa) e ms_adapt (interna)
     -- =========================================================================
     u_config : config_registers
         port map (
             clk        => clk,
             rst        => rst,
-            -- Porta 1: UART
-            write_en   => uart_wr_en,
-            write_addr => uart_wr_addr,
-            write_data => uart_wr_data,
+            -- Porta 1: ms_config_arbiter (UART/CAN/SPI)
+            write_en   => cfg_wr_en,
+            write_addr => cfg_wr_addr,
+            write_data => cfg_wr_data,
             -- Porta 2: ms_adapt
             adapt_wr_en   => adapt_wr_en,
             adapt_wr_addr => adapt_wr_addr,
@@ -347,7 +471,7 @@ begin
     -- =========================================================================
     -- Fuzzificador 1: processa sensor 1 (3 MFs em paralelo)
     -- =========================================================================
-    u_fuzz1 : fuzzifier
+    u_fuzz1 : ms_fuzzify
         port map (
             clk       => clk,
             rst       => rst,
@@ -369,7 +493,7 @@ begin
     -- Fuzzificador 2: processa sensor 2 (3 MFs em paralelo)
     -- Ambos fuzzificadores executam em PARALELO - vantagem do FPGA
     -- =========================================================================
-    u_fuzz2 : fuzzifier
+    u_fuzz2 : ms_fuzzify
         port map (
             clk       => clk,
             rst       => rst,
@@ -391,7 +515,7 @@ begin
     -- Rule Evaluator: 9 operacoes MIN em paralelo (combinacional)
     -- Resultados disponiveis imediatamente apos fuzzificacao
     -- =========================================================================
-    u_rules : rule_evaluator
+    u_rules : ms_rule_eval
         port map (
             mu1_low  => mu1_low,  mu1_med  => mu1_med,  mu1_high => mu1_high,
             mu2_low  => mu2_low,  mu2_med  => mu2_med,  mu2_high => mu2_high,
@@ -404,7 +528,7 @@ begin
     -- Aggregator: MAX por classe de saida (combinacional)
     -- Resultados disponiveis imediatamente apos rule_evaluator
     -- =========================================================================
-    u_agg : aggregator
+    u_agg : ms_aggregate
         port map (
             strength_0 => str0, strength_1 => str1, strength_2 => str2,
             strength_3 => str3, strength_4 => str4, strength_5 => str5,
@@ -422,7 +546,7 @@ begin
     -- =========================================================================
     -- Defuzzifier: media ponderada + classificacao
     -- =========================================================================
-    u_defuzz : defuzzifier
+    u_defuzz : ms_defuzzify
         port map (
             clk          => clk,
             rst          => rst,
@@ -442,7 +566,7 @@ begin
     -- Adaptation Engine (ms_adapt): adaptacao online dos parametros MF
     -- Opera ENTRE ciclos de inferencia, nao adiciona latencia ao pipeline
     -- =========================================================================
-    u_adapt : adaptation_engine
+    u_adapt : ms_adapt
         port map (
             clk          => clk,
             rst          => rst,
