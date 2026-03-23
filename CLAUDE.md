@@ -25,8 +25,9 @@
 **FPGA alvo:** Intel Cyclone V — `5CGXFC7C7F23C8`
 **Ferramenta:** Quartus Prime 22.1std.1 Lite Edition
 **Clock:** 50 MHz
-**UART baud rate:** 115200 bps → `CLKS_PER_BIT = 434`
 **Simulacao:** ModelSim (VHDL)
+
+> **MUDANCA ARQUITETURAL (15/03/2026):** UART, CAN e SPI removidos. Configuracao agora e feita via bus generico `cfg_we/cfg_addr/cfg_data`. Ver secao 3 e 9.
 
 ---
 
@@ -52,18 +53,34 @@ O projeto segue um padrao **Service-Oriented Architecture** mapeado em hardware:
 |---|---|
 | **Top-level do sistema** (entidade Quartus) | `system_top.vhd` |
 | **Service Requester** (cliente) | `ms_client.vhd` |
-| **Service Broker** (orquestrador) | `fuzzy_top.vhd` |
+| **Service Broker** (orquestrador) | `ms_broker.vhd` |
 | **Service Registry** | `config_registers.vhd` |
-| ms_config_uart | `ms_config_uart.vhd` |
-| ms_config_can | `ms_config_can.vhd` |
-| ms_config_spi | `ms_config_spi.vhd` |
-| ms_config_arbiter (infraestrutura do svc_config) | `ms_config_arbiter.vhd` |
+| **Fuzzy Service** (servico composto) | `svc_fuzzy.vhd` |
+| **Adapt Service** (servico de adaptacao) | `svc_adapt.vhd` |
 | ms_fuzzify (x2, paralelo) | `ms_fuzzify.vhd` |
 | bloco interno do ms_fuzzify | `triangular_mf.vhd` |
 | ms_rule_eval | `ms_rule_eval.vhd` |
 | ms_aggregate | `ms_aggregate.vhd` |
 | ms_defuzzify | `ms_defuzzify.vhd` |
 | ms_adapt | `ms_adapt.vhd` |
+
+**Hierarquia de composicao:**
+```
+system_top
+  ├── ms_client        (Service Requester)
+  └── ms_broker        (Service Broker)
+        ├── config_registers  (Service Registry)
+        ├── svc_fuzzy         (Fuzzy Service — composto)
+        │     ├── ms_fuzzify x2
+        │     ├── ms_rule_eval
+        │     ├── ms_aggregate
+        │     └── ms_defuzzify
+        └── svc_adapt         (Adapt Service)
+              └── ms_adapt
+```
+
+> `ms_config_uart`, `ms_config_can`, `ms_config_spi`, `ms_config_arbiter` **REMOVIDOS** em 15/03/2026.
+> `fuzzy_top.vhd` **REMOVIDO** em 15/03/2026 — substituido por `ms_broker.vhd`.
 
 ---
 
@@ -105,33 +122,48 @@ O projeto segue um padrao **Service-Oriented Architecture** mapeado em hardware:
 
 ---
 
-## 6. Pipeline de Inferencia (FSM do `fuzzy_top.vhd`)
+## 6. Pipeline de Inferencia (FSMs do `ms_broker.vhd` e `svc_fuzzy.vhd`)
 
+**FSM do `ms_broker.vhd`** (6 estados):
 ```
 S_IDLE
   │ start=1
   ▼
-S_FUZZ_START    ← pulso fuzz_start=1 (1 ciclo)
+S_FUZZY_START   ← pulso fuzzy_start=1 ao svc_fuzzy (1 ciclo)
   ▼
-S_FUZZ_WAIT     ← aguarda fuzz1_done_r AND fuzz2_done_r
-  ▼              (rule_evaluator e aggregator ja calcularam — combinacional)
-S_DEFUZZ_START  ← pulso defuzz_start=1 (1 ciclo)
-  ▼
-S_DEFUZZ_WAIT   ← aguarda defuzz_done=1
+S_FUZZY_WAIT    ← aguarda fuzzy_done=1 do svc_fuzzy
   ▼
 S_OUTPUT        ← entrega result_valid=1, result_class, result_value
   ▼
-S_ADAPT_START   ← pulso adapt_start=1 (1 ciclo)
+S_ADAPT_START   ← pulso adapt_start=1 ao svc_adapt (1 ciclo)
   ▼
 S_ADAPT_WAIT    ← aguarda adapt_busy=0
   ▼
 S_IDLE
 ```
 
+**FSM interna do `svc_fuzzy.vhd`** (6 estados):
+```
+S_IDLE
+  │ start=1
+  ▼
+S_FUZZ_START    ← pulso fuzz_start=1 aos dois ms_fuzzify (1 ciclo)
+  ▼
+S_FUZZ_WAIT     ← aguarda fuzz1_done AND fuzz2_done
+  ▼              (ms_rule_eval e ms_aggregate ja calcularam — combinacional)
+S_DEFUZZ_START  ← pulso defuzz_start=1 ao ms_defuzzify (1 ciclo)
+  ▼
+S_DEFUZZ_WAIT   ← aguarda defuzz_done=1
+  ▼
+S_OUTPUT        ← emite done=1, result_class, result_value (1 ciclo)
+  ▼
+S_IDLE
+```
+
 **Observacoes criticas:**
-- Os dois fuzzifiers rodam em **paralelo** — mesmo `fuzz_start`, aguarda ambos `done_r`.
-- `rule_evaluator` e `aggregator` sao **puramente combinacionais** — nenhum estado de espera dedicado.
-- `adaptation_engine` roda **fora do caminho critico** da inferencia.
+- Os dois fuzzifiers rodam em **paralelo** — mesmo `fuzz_start`, aguarda ambos `done`.
+- `ms_rule_eval` e `ms_aggregate` sao **puramente combinacionais** — nenhum estado de espera dedicado.
+- `svc_adapt` roda **fora do caminho critico** da inferencia — ms_broker espera em S_ADAPT_WAIT.
 
 ---
 
@@ -139,8 +171,8 @@ S_IDLE
 
 ### `system_top.vhd` — Top-level do sistema (entidade Quartus)
 - Instancia `ms_client` (Requester) e `fuzzy_top` (Broker) e faz o wiring entre eles.
-- Generics repassados: `CLKS_PER_BIT`, `CAN_CLKS_PER_BIT`
-- Portas externas: `clk`, `rst`, interfaces de configuracao (UART/CAN/SPI), `sensor1_in`, `sensor2_in`, ranges `in1/2_min/max`, `request`, `classification(1:0)`, `value_out(15:0)`, `done`
+- **Sem generics** (UART/CAN removidos em 15/03/2026).
+- Portas externas: `clk`, `rst`, `cfg_we`, `cfg_addr(7:0)`, `cfg_data(15:0)`, `sensor1_in`, `sensor2_in`, ranges `in1/2_min/max`, `request`, `classification(1:0)`, `value_out(15:0)`, `done`
 
 ---
 
@@ -155,13 +187,30 @@ S_IDLE
 
 ---
 
-### `fuzzy_top.vhd` — Service Broker
-- **Nao e mais a entidade top-level do Quartus** (substituida por `system_top.vhd`).
-- Generics: `CLKS_PER_BIT : integer := 434`, `CAN_CLKS_PER_BIT : integer := 500`
-- Portas externas: `clk`, `rst`, `uart_rx`, `can_rx`, `spi_cs_n/sclk/mosi`, `sensor1_data(15:0)`, `sensor2_data(15:0)`, `in1_min_val`, `in1_max_val`, `in2_min_val`, `in2_max_val`, `start`, `result_class(1:0)`, `result_value(15:0)`, `result_valid`
-- FSM de 8 estados (ver secao 6)
-- Logica de captura de `done` dos fuzzifiers com registradores `fuzz1_done_r`, `fuzz2_done_r` (reset no estado `S_FUZZ_START`)
-- Sinais de `start` sao assignados combinacionalmente pelo estado da FSM (pulso de 1 ciclo)
+### `ms_broker.vhd` — Service Broker
+- **Orquestra** `config_registers`, `svc_fuzzy` e `svc_adapt`.
+- **Sem generics** (UART/CAN removidos em 15/03/2026).
+- Portas externas: `clk`, `rst`, `cfg_we`, `cfg_addr(7:0)`, `cfg_data(15:0)`, `sensor1_data(15:0)`, `sensor2_data(15:0)`, `in1_min_val`, `in1_max_val`, `in2_min_val`, `in2_max_val`, `start`, `result_class(1:0)`, `result_value(15:0)`, `result_valid`
+- FSM de 6 estados (ver secao 6)
+- Le todos os parametros do `config_registers` e os roteia para `svc_fuzzy` e `svc_adapt`
+- Nao contem logica fuzzy — puramente orquestracao de servicos
+
+---
+
+### `svc_fuzzy.vhd` — Fuzzy Service (servico composto)
+- Encapsula: `ms_fuzzify x2`, `ms_rule_eval`, `ms_aggregate`, `ms_defuzzify`
+- FSM interna de 6 estados (ver secao 6)
+- Recebe: todos os parametros MF, classes de regras, val_ok/alert/crit, sensor data
+- Emite: `done` (1 ciclo), `result_class(1:0)`, `result_value(15:0)`
+- Capture de done dos fuzzifiers via sinais `fuzz1_done`, `fuzz2_done` (reset no S_FUZZ_START)
+
+---
+
+### `svc_adapt.vhd` — Adapt Service
+- Wrapper fino sobre `ms_adapt`
+- Expoe: `start`, `busy`, sensor values, cfg params (alpha/N/k), parametros MF atuais, ranges
+- Saidas de escrita ao registry: `adapt_wr_en`, `adapt_wr_addr(7:0)`, `adapt_wr_data(15:0)`
+- Sem FSM propria — delega inteiramente ao `ms_adapt`
 
 ---
 
@@ -170,31 +219,6 @@ S_IDLE
 - Escrita sincrona, 2 portas: `write_en` (UART, prioridade) e `adapt_wr_en` (ms_adapt)
 - Leitura puramente combinacional (saidas mapeadas diretamente)
 - Nenhuma logica de processamento — repositorio passivo
-
----
-
-### `ms_config_uart.vhd` — ms_config_uart
-- **Dois niveis de FSM independentes:**
-  - FSM UART (bit): `RX_IDLE → RX_START_BIT → RX_DATA_BITS → RX_STOP_BIT`
-  - FSM Protocolo (byte): `P_WAIT_ADDR → P_WAIT_HIGH → P_WAIT_LOW`
-- Protocolo: 3 bytes por escrita — [endereco 8b] [dado_high 8b] [dado_low 8b]
-- Sincronizador de 2 flip-flops contra metaestabilidade (`rx_sync1`, `rx_sync2`)
-- Amostragem no centro do bit (CLKS_PER_BIT/2 para start bit, CLKS_PER_BIT para dados)
-- Opera de forma **totalmente autonoma** — nao recebe `start` do Broker
-
----
-
-### `ms_config_can.vhd` / `ms_config_spi.vhd` — ms_config_can / ms_config_spi
-- Interfaces de configuracao alternativas (CAN 2.0A e SPI Mode 0)
-- Mesma interface de saida que ms_config_uart: `write_en`, `write_addr`, `write_data`
-- Arbitragem de acesso ao Service Registry delegada ao `ms_config_arbiter`
-
----
-
-### `ms_config_arbiter.vhd` — infraestrutura do svc_config
-- Serializa escritas concorrentes de UART, CAN e SPI ao Service Registry
-- Prioridade: UART > CAN > SPI (implementado via `if/elsif`)
-- Nao e um microservico exposto ao Broker — e infraestrutura interna do svc_config
 
 ---
 
@@ -280,15 +304,14 @@ Ciclo N+1:  ms_fuzzify le MF params atualizados do config_registers
 
 ---
 
-## 9. Protocolo UART de Configuracao
+## 9. Interface de Configuracao Generica (cfg bus)
 
 Para escrever no registrador de endereco `ADDR` o valor `DATA` (16 bits Q8.8):
-```
-Byte 1: ADDR         (8 bits)
-Byte 2: DATA[15:8]   (byte alto)
-Byte 3: DATA[7:0]    (byte baixo)
-```
-Configuracao: 8N1, 115200 baud, 50 MHz clock.
+- Aplicar `cfg_addr=ADDR`, `cfg_data=DATA`, `cfg_we='1'` por 1 ciclo de clock.
+- Rebaixar `cfg_we='0'` no ciclo seguinte.
+- Config completa (33 registradores) leva 66 ciclos (1 write + 1 idle por reg).
+
+O `tb_fuzzy_pkg.vhd` exporta `configure_system(cfg_we, cfg_addr, cfg_data)` que faz a carga automaticamente nos testbenches.
 
 ---
 
@@ -310,24 +333,31 @@ Configuracao: 8N1, 115200 baud, 50 MHz clock.
 
 | Arquivo | Tipo | Ultima modificacao relevante |
 |---|---|---|
-| `system_top.vhd` | VHDL top-level (Quartus) | 07/03/2026 |
+| `system_top.vhd` | VHDL top-level (Quartus) | 15/03/2026 |
 | `ms_client.vhd` | VHDL Service Requester | 07/03/2026 |
-| `fuzzy_top.vhd` | VHDL Service Broker | 19/02/2026 |
-| `config_registers.vhd` | VHDL Service Registry | 19/02/2026 |
-| `ms_config_uart.vhd` | VHDL | 19/02/2026 |
-| `ms_config_can.vhd` | VHDL | 19/02/2026 |
-| `ms_config_spi.vhd` | VHDL | 19/02/2026 |
-| `ms_config_arbiter.vhd` | VHDL | 19/02/2026 |
+| `ms_broker.vhd` | VHDL Service Broker | 15/03/2026 |
+| `svc_fuzzy.vhd` | VHDL Fuzzy Service (composto) | 15/03/2026 |
+| `svc_adapt.vhd` | VHDL Adapt Service (wrapper) | 15/03/2026 |
+| `config_registers.vhd` | VHDL Service Registry | 15/03/2026 |
 | `ms_adapt.vhd` | VHDL | 27/02/2026 |
 | `ms_fuzzify.vhd` | VHDL | 27/02/2026 |
 | `triangular_mf.vhd` | VHDL | 01/02/2026 |
 | `ms_rule_eval.vhd` | VHDL | 01/02/2026 |
 | `ms_aggregate.vhd` | VHDL | 01/02/2026 |
 | `ms_defuzzify.vhd` | VHDL | 01/02/2026 |
-| `adaptative_fuzzy.qsf` | Quartus settings | 07/03/2026 |
+| `tb_fuzzy_pkg.vhd` | VHDL package testbenches | 15/03/2026 |
+| `testbench_servidor_idle.vhd` | VHDL testbench regressao | 15/03/2026 |
+| `testbench_cenario_alerta.vhd` | VHDL testbench regressao | 15/03/2026 |
+| `testbench_predial_ok.vhd` | VHDL cenario predial OK | 15/03/2026 |
+| `testbench_predial_critico.vhd` | VHDL cenario predial CRITICO | 15/03/2026 |
+| `testbench_clima_ok.vhd` | VHDL cenario clima OK | 15/03/2026 |
+| `testbench_clima_alerta.vhd` | VHDL cenario clima ALERTA | 15/03/2026 |
+| `sim_idle.do` / `sim_alerta.do` | ModelSim scripts regressao | 15/03/2026 |
+| `sim_predial_ok.do` / `sim_predial_critico.do` | ModelSim scripts predial | 15/03/2026 |
+| `sim_clima_ok.do` / `sim_clima_alerta.do` | ModelSim scripts clima | 15/03/2026 |
+| `adaptative_fuzzy.qsf` | Quartus settings | 07/03/2026 — [VERIFICAR pins apos re-sintese] |
 | `adaptative_fuzzy.qpf` | Quartus project | 26/02/2026 |
 | `output_files/` | Artefatos de sintese | — |
-| `simulation/modelsim/` | Artefatos de simulacao | — |
 
 ---
 
@@ -341,8 +371,8 @@ Configuracao: 8N1, 115200 baud, 50 MHz clock.
 
 4. **`ms_fuzzify.vhd` — reset dos `done_r` no `start`, nao no `rst`:** o processo reseta `done_low_r/med_r/high_r` quando `rst='1' OR start='1'`. Comportamento intencional.
 
-5. **Prioridade de escrita no registry:** UART (porta 1) tem prioridade sobre ms_adapt (porta 2). Implementado via `elsif` — UART ganha em conflito. Conflito e improvavel em operacao normal.
+5. **Prioridade de escrita no registry:** cfg bus (porta 1) tem prioridade sobre svc_adapt (porta 2). Implementado via `elsif` — cfg bus ganha em conflito. Conflito e improvavel em operacao normal (configuracao ocorre antes da inferencia).
 
-6. **`system_top.vhd` e a entidade top-level do Quartus:** `fuzzy_top` nao e mais a entidade top no projeto. O `.qsf` foi atualizado manualmente para apontar para `system_top`.
+6. **`system_top.vhd` e a entidade top-level do Quartus:** o `.qsf` foi atualizado manualmente para apontar para `system_top` (feito em 07/03/2026).
 
-7. **Ranges das variaveis de entrada:** `in1_min_val`, `in1_max_val`, `in2_min_val`, `in2_max_val` sao passados pelo `ms_client` ao `fuzzy_top` (nao vem do registry). Necessarios para o `ms_adapt` calcular constraints dos pontos de controle.
+7. **Ranges das variaveis de entrada:** `in1_min_val`, `in1_max_val`, `in2_min_val`, `in2_max_val` sao passados pelo `ms_client` ao `ms_broker` (nao vem do registry). Necessarios para o `svc_adapt`/`ms_adapt` calcular constraints dos pontos de controle.

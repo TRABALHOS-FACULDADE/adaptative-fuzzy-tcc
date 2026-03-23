@@ -26,13 +26,11 @@ vcom -2008 -work work ms_fuzzify.vhd
 vcom -2008 -work work ms_rule_eval.vhd
 vcom -2008 -work work ms_aggregate.vhd
 vcom -2008 -work work ms_defuzzify.vhd
-vcom -2008 -work work ms_config_uart.vhd
-vcom -2008 -work work ms_config_can.vhd
-vcom -2008 -work work ms_config_spi.vhd
-vcom -2008 -work work ms_config_arbiter.vhd
 vcom -2008 -work work config_registers.vhd
 vcom -2008 -work work ms_adapt.vhd
-vcom -2008 -work work fuzzy_top.vhd
+vcom -2008 -work work svc_fuzzy.vhd
+vcom -2008 -work work svc_adapt.vhd
+vcom -2008 -work work ms_broker.vhd
 vcom -2008 -work work tb_fuzzy_pkg.vhd
 vcom -2008 -work work testbench_cenario_alerta.vhd
 
@@ -48,8 +46,10 @@ add wave -divider "=== Clock e Reset ==="
 add wave -noupdate -label "clk"          /testbench_cenario_alerta/clk
 add wave -noupdate -label "rst"          /testbench_cenario_alerta/rst
 
-add wave -divider "=== UART ==="
-add wave -noupdate -label "uart_rx"      /testbench_cenario_alerta/uart_rx
+add wave -divider "=== Config Bus ==="
+add wave -noupdate -label "cfg_we"       /testbench_cenario_alerta/cfg_we
+add wave -noupdate -label "cfg_addr"     -radix unsigned /testbench_cenario_alerta/cfg_addr
+add wave -noupdate -label "cfg_data"     -radix unsigned /testbench_cenario_alerta/cfg_data
 
 add wave -divider "=== Sensores (Q8.8) ==="
 add wave -noupdate -label "sensor1_data (CPU)" -radix unsigned /testbench_cenario_alerta/sensor1_data

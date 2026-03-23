@@ -13,19 +13,13 @@ architecture sim of testbench_cenario_alerta is
     -- =========================================================================
     -- Declaracao do componente a ser testado (DUT)
     -- =========================================================================
-    component fuzzy_top is
-        generic (
-            CLKS_PER_BIT     : integer;
-            CAN_CLKS_PER_BIT : integer
-        );
+    component ms_broker is
         port (
             clk          : in  std_logic;
             rst          : in  std_logic;
-            uart_rx      : in  std_logic;
-            can_rx       : in  std_logic;
-            spi_cs_n     : in  std_logic;
-            spi_sclk     : in  std_logic;
-            spi_mosi     : in  std_logic;
+            cfg_we       : in  std_logic;
+            cfg_addr     : in  std_logic_vector(7 downto 0);
+            cfg_data     : in  std_logic_vector(15 downto 0);
             sensor1_data : in  std_logic_vector(15 downto 0);
             sensor2_data : in  std_logic_vector(15 downto 0);
             in1_min_val  : in  std_logic_vector(15 downto 0);
@@ -47,12 +41,10 @@ architecture sim of testbench_cenario_alerta is
     signal clk          : std_logic := '0';
     signal rst          : std_logic := '1';
 
-    -- Interfaces de configuracao externa
-    signal uart_rx      : std_logic := '1';   -- idle = '1' (linha em repouso)
-    signal can_rx       : std_logic := '1';   -- idle = recessive ('1')
-    signal spi_cs_n     : std_logic := '1';   -- inactive = chip select desativado
-    signal spi_sclk     : std_logic := '0';   -- idle = '0' (CPOL=0)
-    signal spi_mosi     : std_logic := '0';
+    -- Interface de configuracao generica
+    signal cfg_we       : std_logic := '0';
+    signal cfg_addr     : std_logic_vector(7 downto 0) := (others => '0');
+    signal cfg_data     : std_logic_vector(15 downto 0) := (others => '0');
 
     -- Entradas dos sensores (Q8.8)
     signal sensor1_data : std_logic_vector(15 downto 0) := (others => '0');
@@ -77,19 +69,13 @@ begin
     -- =========================================================================
     -- Instancia do DUT
     -- =========================================================================
-    DUT : fuzzy_top
-        generic map (
-            CLKS_PER_BIT     => CLKS_PER_BIT,
-            CAN_CLKS_PER_BIT => 500
-        )
+    DUT : ms_broker
         port map (
             clk          => clk,
             rst          => rst,
-            uart_rx      => uart_rx,
-            can_rx       => can_rx,
-            spi_cs_n     => spi_cs_n,
-            spi_sclk     => spi_sclk,
-            spi_mosi     => spi_mosi,
+            cfg_we       => cfg_we,
+            cfg_addr     => cfg_addr,
+            cfg_data     => cfg_data,
             sensor1_data => sensor1_data,
             sensor2_data => sensor2_data,
             in1_min_val  => in1_min_val,
@@ -124,9 +110,9 @@ begin
         wait for CLK_PERIOD * 3;
 
         -- =====================================================================
-        -- 2. Configurar o sistema via UART (33 registradores)
+        -- 2. Configurar o sistema via bus cfg (33 registradores, 1 ciclo cada)
         -- =====================================================================
-        configure_system(uart_rx);
+        configure_system(cfg_we, cfg_addr, cfg_data);
         wait for CLK_PERIOD * 5;
 
         -- =====================================================================
@@ -140,7 +126,6 @@ begin
 
         -- =====================================================================
         -- 4. Disparar a inferencia (pulso de start de exatamente 1 ciclo)
-        --    A FSM em S_IDLE captura start='1' no flanco de subida.
         -- =====================================================================
         wait until rising_edge(clk);
         start <= '1';
@@ -149,8 +134,6 @@ begin
 
         -- =====================================================================
         -- 5. Aguardar o resultado
-        --    result_valid, result_class e result_value sao atribuidos no mesmo
-        --    ciclo (S_OUTPUT da FSM), portanto ficam estaveis juntos.
         -- =====================================================================
         wait until result_valid = '1';
         wait until rising_edge(clk);   -- margem de 1 ciclo apos o pulso

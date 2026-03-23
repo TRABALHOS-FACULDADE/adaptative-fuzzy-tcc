@@ -1,11 +1,11 @@
-Analysis & Synthesis Status : Successful - Sat Mar  7 10:45:08 2026
+Analysis & Synthesis Status : Successful - Sun Mar 15 20:49:03 2026
 Quartus Prime Version : 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 Revision Name : adaptative_fuzzy
 Top-level Entity Name : system_top
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 2725
-Total pins : 123
+Total registers : 2411
+Total pins : 143
 Total virtual pins : 0
 Total block memory bits : 0
 Total DSP Blocks : 13

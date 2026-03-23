@@ -50,18 +50,16 @@ if {[file exists rtl_work]} {
 vlib rtl_work
 vmap work rtl_work
 
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/triangular_mf.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_fuzzify.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_rule_eval.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_aggregate.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_defuzzify.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_uart.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_can.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_spi.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_config_arbiter.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/config_registers.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_adapt.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/fuzzy_top.vhd}
-vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_client.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/svc_fuzzy.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/svc_adapt.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_broker.vhd}
 vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/system_top.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_client.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/config_registers.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_rule_eval.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_fuzzify.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_defuzzify.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_aggregate.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/ms_adapt.vhd}
+vcom -93 -work work {C:/Dev/TCC/AdaptativeFuzzyForGenericResources/triangular_mf.vhd}
 

@@ -7,7 +7,7 @@
 --                linguistic_term.py e output_class.py viram constantes embutidas
 --                adaptation_config -> registradores 0x1E..0x20
 --
--- 33 registradores de 16 bits, escritos via UART ou ms_adapt:
+-- 33 registradores de 16 bits, escritos via cfg bus ou svc_adapt:
 --   0x00..0x08: Parametros MF do Input 1 (a,b,c para LOW, MED, HIGH)
 --   0x09..0x11: Parametros MF do Input 2 (a,b,c para LOW, MED, HIGH)
 --   0x12..0x1A: Classe de saida de cada regra (2 bits: 00=OK, 01=ALERT, 10=CRIT)
@@ -17,9 +17,9 @@
 --   0x20:       spread_factor - fator k de espalhamento (Q8.8)
 --
 -- Duas portas de escrita:
---   1. UART (externa) - configuracao inicial e reconfiguracao
---   2. ms_adapt (interna) - adaptacao online dos parametros MF
---   Prioridade: UART ganha em caso de conflito (cenario improvavel)
+--   1. cfg bus (externa) - configuracao inicial via bus generico word-addressed
+--   2. svc_adapt (interna) - adaptacao online dos parametros MF (0x00..0x11)
+--   Prioridade: cfg bus ganha em caso de conflito (cenario improvavel)
 --
 -- Leitura continua (para o datapath)
 -- =============================================================================
@@ -33,12 +33,12 @@ entity config_registers is
         clk        : in  std_logic;
         rst        : in  std_logic;
 
-        -- Interface de escrita 1: UART (configuracao externa)
+        -- Interface de escrita 1: cfg bus (configuracao externa)
         write_en   : in  std_logic;
         write_addr : in  std_logic_vector(7 downto 0);
         write_data : in  std_logic_vector(15 downto 0);
 
-        -- Interface de escrita 2: ms_adapt (adaptacao online)
+        -- Interface de escrita 2: svc_adapt (adaptacao online)
         adapt_wr_en   : in  std_logic;
         adapt_wr_addr : in  std_logic_vector(7 downto 0);
         adapt_wr_data : in  std_logic_vector(15 downto 0);
@@ -118,7 +118,7 @@ begin
                     regs(addr_int) <= write_data;
                 end if;
             elsif adapt_wr_en = '1' then
-                -- Porta 2: ms_adapt (enderecos 0x00..0x11 apenas - parametros MF)
+                -- Porta 2: svc_adapt (enderecos 0x00..0x11 apenas - parametros MF)
                 addr_int := to_integer(unsigned(adapt_wr_addr));
                 if addr_int >= 0 and addr_int <= 17 then
                     regs(addr_int) <= adapt_wr_data;

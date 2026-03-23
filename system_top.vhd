@@ -9,7 +9,7 @@
 --
 -- Este e o ponto de entrada do projeto FPGA (entidade top-level do Quartus).
 -- Expoe ao mundo externo:
---   - Interfaces de configuracao (UART, CAN, SPI) → passadas ao Broker
+--   - Interface de configuracao generica (cfg_we, cfg_addr, cfg_data)
 --   - Dados de sensor e ranges → passados ao Requester
 --   - Controle de requisicao (request) → dispara nova inferencia
 --   - Resultados classificados (classification, value_out, done) → do Requester
@@ -20,20 +20,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity system_top is
-    generic (
-        CLKS_PER_BIT     : integer := 434;   -- UART: 50 MHz / 115200 baud
-        CAN_CLKS_PER_BIT : integer := 500    -- CAN:  50 MHz / 100 kbps
-    );
     port (
         clk          : in  std_logic;
         rst          : in  std_logic;
 
-        -- Interfaces de configuracao externa (repassadas ao Broker)
-        uart_rx      : in  std_logic;
-        can_rx       : in  std_logic;
-        spi_cs_n     : in  std_logic;
-        spi_sclk     : in  std_logic;
-        spi_mosi     : in  std_logic;
+        -- Interface de configuracao generica (word-addressed, 1 reg/ciclo)
+        cfg_we       : in  std_logic;
+        cfg_addr     : in  std_logic_vector(7 downto 0);
+        cfg_data     : in  std_logic_vector(15 downto 0);
 
         -- Dados de sensor de fonte externa (Q8.8 ponto fixo)
         sensor1_in   : in  std_logic_vector(15 downto 0);
@@ -102,19 +96,13 @@ architecture rtl of system_top is
         );
     end component;
 
-    component fuzzy_top is
-        generic (
-            CLKS_PER_BIT     : integer;
-            CAN_CLKS_PER_BIT : integer
-        );
+    component ms_broker is
         port (
             clk          : in  std_logic;
             rst          : in  std_logic;
-            uart_rx      : in  std_logic;
-            can_rx       : in  std_logic;
-            spi_cs_n     : in  std_logic;
-            spi_sclk     : in  std_logic;
-            spi_mosi     : in  std_logic;
+            cfg_we       : in  std_logic;
+            cfg_addr     : in  std_logic_vector(7 downto 0);
+            cfg_data     : in  std_logic_vector(15 downto 0);
             sensor1_data : in  std_logic_vector(15 downto 0);
             sensor2_data : in  std_logic_vector(15 downto 0);
             in1_min_val  : in  std_logic_vector(15 downto 0);
@@ -160,21 +148,15 @@ begin
         );
 
     -- =========================================================================
-    -- Service Broker: pipeline de inferencia fuzzy + configuracao + adaptacao
+    -- Service Broker: orquestra Fuzzy Service e Adapt Service
     -- =========================================================================
-    u_broker : fuzzy_top
-        generic map (
-            CLKS_PER_BIT     => CLKS_PER_BIT,
-            CAN_CLKS_PER_BIT => CAN_CLKS_PER_BIT
-        )
+    u_broker : ms_broker
         port map (
             clk          => clk,
             rst          => rst,
-            uart_rx      => uart_rx,
-            can_rx       => can_rx,
-            spi_cs_n     => spi_cs_n,
-            spi_sclk     => spi_sclk,
-            spi_mosi     => spi_mosi,
+            cfg_we       => cfg_we,
+            cfg_addr     => cfg_addr,
+            cfg_data     => cfg_data,
             sensor1_data => client_sensor1,
             sensor2_data => client_sensor2,
             in1_min_val  => client_in1_min,
