@@ -1,23 +1,25 @@
 -- =============================================================================
 -- testbench_clima_ok.vhd
--- Cenario Real B1: Avaliacao de Risco Climatico — Risco Baixo (OK)
+-- Cenario Real B1: Avaliacao de Risco Climatico — Risco Elevado (CRITICAL)
 --
 -- Dominio: avaliacao de risco de evento climatico severo
---   sensor1 = temperatura normalizada (Q8.8, 0=baixa, 256=muito alta)
+--   sensor1 = temperatura normalizada  (Q8.8, 0=baixa, 256=muito alta)
 --   sensor2 = umidade relativa normalizada (Q8.8, 0=0%, 256=100%)
 --
--- Sub-cenario: temperatura e umidade baixas
---   temperatura = 30 (~12% da escala)
---   umidade     = 30 (~12% da escala)
+-- Sub-cenario: temperatura moderada, umidade muito elevada
+--   temperatura = 130 (~51% da escala)
+--   umidade     = 200 (~78% da escala)
 --
 -- Calculo esperado:
---   mu_low(30) = (85-30)/(85-0) * 256 = 55*256/85 = 165  (ombro esquerdo)
---   mu_med(30) = 0  (30 < a_med=64)
---   mu_high(30)= 0
---   strength_0 (LOW,LOW) = MIN(165,165) = 165  -> OK
---   agg_ok=165, agg_alert=0, agg_crit=0
---   crisp = 165*85/165 = 85
---   classificacao: 85 <= val_ok(85) -> "00" (OK)
+--   mu_med(130):  lado descendente (128 < 130 < 192)
+--     = (192-130)/(192-128) * 256 = 62*256/64 = 248
+--   mu_high(200): ombro direito (200 > 171)
+--     = (200-171)/(256-171) * 256 = 29*256/85 = 87
+--   mu_low = 0 para ambos (fora da regiao LOW)
+--   strength_5 (MED,HIGH) = MIN(248,87) = 87  -> CRITICAL
+--   agg_crit=87, agg_ok=0, agg_alert=0
+--   crisp = 87*241/87 = 241
+--   classificacao: 241 > val_alert(171) -> "10" (CRITICAL)
 -- =============================================================================
 
 library IEEE;
@@ -98,9 +100,9 @@ begin
         configure_system(cfg_we, cfg_addr, cfg_data);
         wait for CLK_PERIOD * 5;
 
-        -- Temperatura: 30 (~12%), Umidade: 30 (~12%)
-        sensor1_data <= x"001E";  -- 30
-        sensor2_data <= x"001E";  -- 30
+        -- Temperatura: 130 (~51%), Umidade: 200 (~78%)
+        sensor1_data <= x"0082";  -- 130
+        sensor2_data <= x"00C8";  -- 200
 
         wait until rising_edge(clk);
         start <= '1';
@@ -110,27 +112,27 @@ begin
         wait until result_valid = '1';
         wait until rising_edge(clk);
 
-        assert result_class = "00"
+        assert result_class = "10"
             report "FALHOU [result_class]: obtido " &
                    integer'image(to_integer(unsigned(result_class))) &
-                   ", esperado 0 (OK)"
+                   ", esperado 2 (CRITICAL)"
             severity error;
 
-        assert result_value = x"0055"
+        assert result_value = x"00F1"
             report "FALHOU [result_value]: obtido " &
                    integer'image(to_integer(unsigned(result_value))) &
-                   ", esperado 85 (0x0055)"
+                   ", esperado 241 (0x00F1)"
             severity error;
 
-        report "=== Cenario Clima B1: Risco Baixo ===" severity note;
-        report "  sensor1 (temperatura) = 30 (~12%)" severity note;
-        report "  sensor2 (umidade)     = 30 (~12%)" severity note;
+        report "=== Cenario Clima B1: Risco Elevado ===" severity note;
+        report "  sensor1 (temperatura) = 130 (~51%)" severity note;
+        report "  sensor2 (umidade)     = 200 (~78%)" severity note;
         report "  result_class = " &
                integer'image(to_integer(unsigned(result_class))) &
-               "  (esperado 0 = OK)" severity note;
+               "  (esperado 2 = CRITICAL)" severity note;
         report "  result_value = " &
                integer'image(to_integer(unsigned(result_value))) &
-               "  (esperado 85)" severity note;
+               "  (esperado 241)" severity note;
         report "=== Simulacao concluida ===" severity note;
         wait;
     end process;

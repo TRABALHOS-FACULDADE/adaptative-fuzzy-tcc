@@ -3,20 +3,20 @@
 -- Cenario Real A2: Gestao Predial — Consumo Critico
 --
 -- Dominio: monitoramento de consumo de recursos de um edificio
---   sensor1 = consumo de agua  (Q8.8, 0=0%, 256=100% da capacidade)
+--   sensor1 = consumo de agua   (Q8.8, 0=0%, 256=100% da capacidade)
 --   sensor2 = consumo de energia (Q8.8, 0=0%, 256=100% da capacidade)
 --
--- Sub-cenario: consumo alto em ambos os recursos
---   agua    = 200 (~78% da capacidade)
---   energia = 200 (~78% da capacidade)
+-- Sub-cenario: vazamento detectado na rede hidrica, energia moderada
+--   agua    = 220 (~86% da capacidade)
+--   energia = 150 (~59% da capacidade)
 --
 -- Calculo esperado:
---   mu_low(200)  = 0  (200 > c_low=85)
---   mu_med(200)  = 0  (200 > c_med=192)
---   mu_high(200) = (200-171)/(256-171) * 256 = 29*256/85 = 87  (ombro direito)
---   strength_8 (HIGH,HIGH) = MIN(87,87) = 87  -> CRITICAL
---   agg_crit=87, agg_ok=0, agg_alert=0
---   crisp = 87*241/87 = 241
+--   mu_high(220) = (220-171)/(256-171) * 256 = 49*256/85 = 147  (ombro direito)
+--   mu_med(150)  = (192-150)/(192-128) * 256 = 42*256/64 = 168  (lado descendente)
+--   mu_low = 0 para ambos (fora da regiao LOW)
+--   strength_7 (HIGH,MED) = MIN(147,168) = 147  -> CRITICAL
+--   agg_crit=147, agg_ok=0, agg_alert=0
+--   crisp = 147*241/147 = 241
 --   classificacao: 241 > val_alert(171) -> "10" (CRITICAL)
 -- =============================================================================
 
@@ -98,9 +98,9 @@ begin
         configure_system(cfg_we, cfg_addr, cfg_data);
         wait for CLK_PERIOD * 5;
 
-        -- Consumo de agua: 200 (~78%), consumo de energia: 200 (~78%)
-        sensor1_data <= x"00C8";  -- 200
-        sensor2_data <= x"00C8";  -- 200
+        -- Agua: 220 (~86%), Energia: 150 (~59%)
+        sensor1_data <= x"00DC";  -- 220
+        sensor2_data <= x"0096";  -- 150
 
         wait until rising_edge(clk);
         start <= '1';
@@ -123,8 +123,8 @@ begin
             severity error;
 
         report "=== Cenario Predial A2: Consumo Critico ===" severity note;
-        report "  sensor1 (agua)    = 200 (~78%)" severity note;
-        report "  sensor2 (energia) = 200 (~78%)" severity note;
+        report "  sensor1 (agua)    = 220 (~86%)" severity note;
+        report "  sensor2 (energia) = 150 (~59%)" severity note;
         report "  result_class = " &
                integer'image(to_integer(unsigned(result_class))) &
                "  (esperado 2 = CRITICAL)" severity note;

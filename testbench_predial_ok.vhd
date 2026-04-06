@@ -3,20 +3,20 @@
 -- Cenario Real A1: Gestao Predial — Consumo Normal (OK)
 --
 -- Dominio: monitoramento de consumo de recursos de um edificio
---   sensor1 = consumo de agua  (Q8.8, 0=0%, 256=100% da capacidade)
+--   sensor1 = consumo de agua   (Q8.8, 0=0%, 256=100% da capacidade)
 --   sensor2 = consumo de energia (Q8.8, 0=0%, 256=100% da capacidade)
 --
--- Sub-cenario: consumo baixo em ambos os recursos
---   agua    = 25 (~10% da capacidade)
---   energia = 25 (~10% da capacidade)
+-- Sub-cenario: agua baixa, energia moderada (ar-condicionado em operacao)
+--   agua    = 30  (~12% da capacidade)
+--   energia = 115 (~45% da capacidade)
 --
 -- Calculo esperado:
---   mu_low(25) = (85-25)/(85-0) * 256 = 60*256/85 = 180  (ombro esquerdo)
---   mu_med(25) = 0  (25 < a_med=64)
---   mu_high(25)= 0
---   strength_0 (LOW,LOW) = MIN(180,180) = 180  -> OK
---   agg_ok=180, agg_alert=0, agg_crit=0
---   crisp = 180*85/180 = 85
+--   mu_low(30)   = (85-30)/85 * 256 = 55*256/85 = 165  (ombro esquerdo)
+--   mu_med(115)  = (115-64)/(128-64) * 256 = 51*256/64 = 204  (lado ascendente)
+--   mu_high = 0 para ambos (fora da regiao HIGH)
+--   strength_1 (LOW,MED) = MIN(165,204) = 165  -> OK
+--   agg_ok=165, agg_alert=0, agg_crit=0
+--   crisp = 165*85/165 = 85
 --   classificacao: 85 <= val_ok(85) -> "00" (OK)
 -- =============================================================================
 
@@ -98,9 +98,9 @@ begin
         configure_system(cfg_we, cfg_addr, cfg_data);
         wait for CLK_PERIOD * 5;
 
-        -- Consumo de agua: 25 (~10%), consumo de energia: 25 (~10%)
-        sensor1_data <= x"0019";  -- 25
-        sensor2_data <= x"0019";  -- 25
+        -- Agua: 30 (~12%), Energia: 115 (~45%)
+        sensor1_data <= x"001E";  -- 30
+        sensor2_data <= x"0073";  -- 115
 
         wait until rising_edge(clk);
         start <= '1';
@@ -123,8 +123,8 @@ begin
             severity error;
 
         report "=== Cenario Predial A1: Consumo Normal ===" severity note;
-        report "  sensor1 (agua)    = 25 (~10%)" severity note;
-        report "  sensor2 (energia) = 25 (~10%)" severity note;
+        report "  sensor1 (agua)    = 30  (~12%)" severity note;
+        report "  sensor2 (energia) = 115 (~45%)" severity note;
         report "  result_class = " &
                integer'image(to_integer(unsigned(result_class))) &
                "  (esperado 0 = OK)" severity note;
