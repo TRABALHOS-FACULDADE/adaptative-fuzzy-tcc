@@ -352,6 +352,8 @@ O `tb_fuzzy_pkg.vhd` exporta `configure_system(cfg_we, cfg_addr, cfg_data)` que 
 | `testbench_predial_critico.vhd` | VHDL cenario predial CRITICO | 15/03/2026 |
 | `testbench_clima_ok.vhd` | VHDL cenario clima OK | 15/03/2026 |
 | `testbench_clima_alerta.vhd` | VHDL cenario clima ALERTA | 15/03/2026 |
+| `testbench_adaptacao.vhd` | VHDL testbench adaptacao online | 21/04/2026 |
+| `sim_adaptacao.do` | ModelSim script adaptacao | 21/04/2026 |
 | `sim_idle.do` / `sim_alerta.do` | ModelSim scripts regressao | 15/03/2026 |
 | `sim_predial_ok.do` / `sim_predial_critico.do` | ModelSim scripts predial | 15/03/2026 |
 | `sim_clima_ok.do` / `sim_clima_alerta.do` | ModelSim scripts clima | 15/03/2026 |
@@ -365,7 +367,12 @@ O `tb_fuzzy_pkg.vhd` exporta `configure_system(cfg_we, cfg_addr, cfg_data)` que 
 
 1. **`ms_defuzzify.vhd` — deteccao de inicio da divisao:** usa a condicao composta `div_count=0 AND div_dividend=0 AND div_quotient=0 AND div_remainder=0` para distinguir "primeira entrada no estado S_DIVIDE" de "divisao em andamento". Os sinais do divisor DEVEM estar no bloco `if rst='1'` (corrigido em 28/02/2026); sem isso, a primeira inferencia classifica erroneamente como CRITICAL.
 
-2. **`ms_adapt.vhd` — sqrt por digit-by-digit, nao Newton-Raphson:** o comentario no header do arquivo menciona "Newton-Raphson", mas o codigo implementa digit-by-digit com 12 iteracoes.
+2. **`ms_adapt.vhd` — bugs corrigidos em 21/04/2026 (descobertos pelo testbench_adaptacao):**
+   - **Bug 1 (ordem de condição do divisor):** `div_done='1'` e `div_busy='0'` ocorrem simultaneamente; o `elsif div_done` nunca era alcançado — divisão reiniciava infinitamente. Fix: checar `div_done='1'` PRIMEIRO nos 4 estados (S_WELFORD_2, S_WELFORD_5, S_VARIANCE_1, S_VARIANCE_2).
+   - **Bug 2 (slice errado do quociente):** `div_quotient(15 downto 0)` em vez de `(23 downto 8)` — média 256× maior que o correto, parâmetros subiam em vez de descer. Fix: usar `div_quotient(23 downto 8)` em S_WELFORD_2 e S_WELFORD_5.
+   - Regressão completa executada após as correções: todos os 6 testbenches estáticos continuaram passando.
+
+3. **`ms_adapt.vhd` — sqrt por digit-by-digit, nao Newton-Raphson:** o comentario no header do arquivo menciona "Newton-Raphson", mas o codigo implementa digit-by-digit com 12 iteracoes.
 
 3. **`ms_adapt.vhd` — `adapt_wr_en` so escreve em 0x00..0x11:** `config_registers` tem hardcoded `if addr_int >= 0 and addr_int <= 17`. A engine de adaptacao nunca deve tentar escrever fora desse range.
 

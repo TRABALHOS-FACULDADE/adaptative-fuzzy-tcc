@@ -313,23 +313,28 @@ begin
                     -- ==========================================================
                     -- WELFORD Input 1: Passo 2 - mean += delta / n
                     -- Inicia divisao sequencial: delta / n1
+                    -- NOTA: div_done deve ser verificado ANTES de div_busy='0',
+                    -- pois quando a divisao termina ambos ocorrem no mesmo ciclo
+                    -- (div_done='1' e div_busy='0' simultaneos). Se div_busy='0'
+                    -- fosse verificado primeiro, a divisao seria reiniciada.
                     -- ==========================================================
                     when S_WELFORD_2 =>
-                        if div_busy = '0' and div_start = '0' then
+                        if div_done = '1' then
+                            -- Resultado: dividendo foi |delta|<<8, logo o quociente
+                            -- esta em Q16.16; extrair bits 23..8 para obter Q8.8.
+                            -- (usar bits 15..0 daria resultado 256x maior — bug)
+                            if delta >= 0 then
+                                mean1 <= mean1 + signed(div_quotient(23 downto 8));
+                            else
+                                mean1 <= mean1 - signed(div_quotient(23 downto 8));
+                            end if;
+                            state <= S_WELFORD_3;
+                        elsif div_busy = '0' and div_start = '0' then
                             -- Preparar divisao: |delta| << 8 / n
                             div_dividend <= resize(unsigned(std_logic_vector(abs(delta))), 24)
                                             & x"00";
                             div_divisor  <= resize(n1, 32);
                             div_start    <= '1';
-                        elsif div_done = '1' then
-                            -- Resultado da divisao em Q8.8
-                            if delta >= 0 then
-                                mean1 <= mean1 + signed(div_quotient(15 downto 0));
-                            else
-                                mean1 <= mean1 - signed(div_quotient(15 downto 0));
-                            end if;
-                            -- delta2 = x - mean_novo (calcular no proximo estado)
-                            state <= S_WELFORD_3;
                         end if;
 
                     -- ==========================================================
@@ -351,20 +356,22 @@ begin
 
                     -- ==========================================================
                     -- WELFORD Input 2: Passo 2 - mean += delta / n
+                    -- (mesma correcao de ordem: div_done antes de div_busy)
                     -- ==========================================================
                     when S_WELFORD_5 =>
-                        if div_busy = '0' and div_start = '0' then
+                        if div_done = '1' then
+                            -- Mesma correcao: bits 23..8 para Q8.8 correto
+                            if delta >= 0 then
+                                mean2 <= mean2 + signed(div_quotient(23 downto 8));
+                            else
+                                mean2 <= mean2 - signed(div_quotient(23 downto 8));
+                            end if;
+                            state <= S_WELFORD_6;
+                        elsif div_busy = '0' and div_start = '0' then
                             div_dividend <= resize(unsigned(std_logic_vector(abs(delta))), 24)
                                             & x"00";
                             div_divisor  <= resize(n2, 32);
                             div_start    <= '1';
-                        elsif div_done = '1' then
-                            if delta >= 0 then
-                                mean2 <= mean2 + signed(div_quotient(15 downto 0));
-                            else
-                                mean2 <= mean2 - signed(div_quotient(15 downto 0));
-                            end if;
-                            state <= S_WELFORD_6;
                         end if;
 
                     -- ==========================================================
@@ -394,7 +401,11 @@ begin
                     -- Extrair os 16 bits centrais para Q8.8
                     -- ==========================================================
                     when S_VARIANCE_1 =>
-                        if div_busy = '0' and div_start = '0' then
+                        if div_done = '1' then
+                            -- Resultado em Q16.16, extrair Q8.8 (shift right 8)
+                            var1  <= signed(div_quotient(23 downto 8));
+                            state <= S_VARIANCE_2;
+                        elsif div_busy = '0' and div_start = '0' then
                             if n1 > 1 then
                                 div_dividend <= unsigned(std_logic_vector(abs(m2_1)));
                                 div_divisor  <= resize(n1 - 1, 32);
@@ -403,17 +414,16 @@ begin
                                 var1  <= ZERO_FP;
                                 state <= S_VARIANCE_2;
                             end if;
-                        elsif div_done = '1' then
-                            -- Resultado em Q16.16, extrair Q8.8 (shift right 8)
-                            var1  <= signed(div_quotient(23 downto 8));
-                            state <= S_VARIANCE_2;
                         end if;
 
                     -- ==========================================================
                     -- VARIANCE 2: var = m2 / (n - 1)
                     -- ==========================================================
                     when S_VARIANCE_2 =>
-                        if div_busy = '0' and div_start = '0' then
+                        if div_done = '1' then
+                            var2  <= signed(div_quotient(23 downto 8));
+                            state <= S_SQRT_1_INIT;
+                        elsif div_busy = '0' and div_start = '0' then
                             if n2 > 1 then
                                 div_dividend <= unsigned(std_logic_vector(abs(m2_2)));
                                 div_divisor  <= resize(n2 - 1, 32);
@@ -422,9 +432,6 @@ begin
                                 var2  <= ZERO_FP;
                                 state <= S_SQRT_1_INIT;
                             end if;
-                        elsif div_done = '1' then
-                            var2  <= signed(div_quotient(23 downto 8));
-                            state <= S_SQRT_1_INIT;
                         end if;
 
                     -- ==========================================================
